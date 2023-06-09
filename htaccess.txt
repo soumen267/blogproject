@@ -1,0 +1,2 @@
+DirectoryIndex users/index.php
+DirectoryIndex admin/index.php
