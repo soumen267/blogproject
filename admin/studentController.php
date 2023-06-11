@@ -1,6 +1,5 @@
 <?php
 require_once "database.php";
-session_start();
 
 class studentController extends database{
 
@@ -65,8 +64,21 @@ class studentController extends database{
     }
 
     public function logout(){
-        session_destroy();
-        header("location: http://localhost/blogproject/admin/");
+        $username = $_SESSION['name'];
+        $sql = "SELECT `user_role` FROM `tbl_users` WHERE `username` = '$username'";
+        $res = $this->conn->query($sql);
+        if(mysqli_num_rows($res) > 0){
+            foreach($res as $val){
+                $role = implode(",",$val);
+            }
+            if($role == 'user'){
+                session_destroy();
+                header("location: http://localhost/blogproject/blogproject/users/");
+            }elseif($role == 'admin'){
+                session_destroy();
+                header("location: http://localhost/blogproject/blogproject/admin/");
+            }
+        }
     }
 }
 ?>

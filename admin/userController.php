@@ -70,6 +70,17 @@ class userController extends database{
         
     }
 
+    public function fetchLoggedInUser($table_name, $username){
+        $sql = "SELECT * FROM $table_name WHERE `username` = '$username'";
+        $res = $this->conn->query($sql);
+        if($res->num_rows > 0){
+            return $res;
+        }else{
+            return false;
+        }
+        
+    }
+
     public function deleteuser($table_name, $id){
         $time = date("Y-m-d H:i:s");
         $dataDelete = "UPDATE $table_name SET `deleted_at` = '$time' WHERE `user_id` = '$id'";
@@ -89,6 +100,33 @@ class userController extends database{
             return $count;
         }else{
             return false;
+        }
+    }
+
+    function isAdmin($tablename,$username){
+        $sql = "SELECT `user_role` FROM $tablename WHERE `username` = '$username'";
+        $res = $this->conn->query($sql);
+
+        if(mysqli_num_rows($res) > 0){
+            foreach($res as $val){
+                $role = implode(",",$val);
+            }
+            if($role == 'user'){
+                return false;
+            }elseif($role == 'admin'){
+                return true;
+            }
+        }
+    }
+
+    function getUserID($tablename,$username){
+        $sql = "SELECT `user_id` FROM $tablename WHERE `username` = '$username'";
+        $res = $this->conn->query($sql);
+        if(mysqli_num_rows($res) > 0){
+            foreach($res as $val){
+                $user_id = implode(",",$val);
+                return $user_id;
+            }
         }
     }
 

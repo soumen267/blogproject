@@ -1,6 +1,6 @@
 <?php
 require_once "postController.php";
-
+session_start();
 $obj = new postController();
 global $cateerrors, $titleerrors, $authorerrors,$usererrors,$contenterrors,$tagerrors,$statuserrors;
 $err = 0;
@@ -33,14 +33,16 @@ if (isset($_POST['post'])) {
         $statuserrors = "Post status is required!";
         $err = 1;
     }
-     if($err != 1){
-        $filename=$_FILES['post_image']['name'];
-        $filetype=$_FILES['post_image']['type'];
-        if($filetype=='image/jpeg' or $filetype=='./image/png' or $filetype=='image/gif')
+     if($err != 1 && isset($_FILES['post_image']['name'])){
+        $filename = $_FILES['post_image']['name'];
+        $tmpname = $_FILES['post_image']['tmp_name'];
+        $image_type = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        $fileInfo = pathinfo($filename);
+        $ipath = uniqid() . '.' . $fileInfo['extension'];
+        $allow_type = array('jpeg','jpg');
+        if(in_array($image_type, $allow_type))
         {
         move_uploaded_file($_FILES['post_image']['tmp_name'],'images/posts/'.$filename);
-        $filepath="./images/posts/".$filename;
-     }
         $date = date('Y-m-d');
         $insertData = array(
             'post_cat_id' => mysqli_real_escape_string($obj->conn, $_POST['post_cat_id']),
@@ -54,8 +56,11 @@ if (isset($_POST['post'])) {
             'post_status' => mysqli_real_escape_string($obj->conn, $_POST['post_status'])
         );
         $obj->insertPostData('tbl_posts', $insertData);
+        $_SESSION['added'] = 'Post added successfully.';
+        header("location: http://localhost/blogproject/blogproject/admin/post.php");
+        exit();
     }
-    
+    }    
 }
 $result = $obj->fetchByCategory('tbl_category');
 
@@ -87,15 +92,22 @@ $result = $obj->fetchByCategory('tbl_category');
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
+                        <?php if(isset($_SESSION['msg'])){?>
+                            <div class="alert alert-success alert-block">
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                                <?php echo $_SESSION['msg'];
+                                    unset($_SESSION['msg']);
+                                ?>
+                            </div>
+                        <?php } ?>
                         <h1 class="page-header">
                             Posts
-                            <small>Subheading</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i> <a href="dashboard.php">Dashboard</a>
                             </li>
-                            <li class="active">
+                            <li class="">
                                 <i class="fa fa-file"></i> Blank Page
                             </li>
                         </ol>

@@ -1,10 +1,15 @@
 <?php
+ini_set("display_errors", 1);
+error_reporting(E_ALL);
+session_start();
 require_once "postController.php";
+//require_once "../helper.php";
 
 $obj = new postController();
 if(ISSET($_GET['edit'])){
     $id = $_GET['edit'];
     $result = $obj->fetchPostsByID('tbl_posts', 'tbl_category', $id);
+        
     foreach($result as $row){
         $fid = $row['fid'];
         $post_id = $row['id'];
@@ -18,26 +23,68 @@ if(ISSET($_GET['edit'])){
     }
 }
 $result1 = $obj->fetchByCategory('tbl_category');
-if(ISSET($_POST['updatepost'])){
+if(isset($_FILES['post_image']['name']) == true && $_FILES['post_image']['name']){
+        $username = $_SESSION['name'];
+        $userid = $obj->getUserID('tbl_users', $username);
         $id = $_POST['id'];
-        $date = date('Y-m-d');
+        $filename2 = $post_image;
+        $filename = $_FILES['post_image']['name'];
+        $tmpname = $_FILES['post_image']['tmp_name'];
+        //$filesize = $_FILES['post_image']['size'];
+        // $filetype = $_FILES['post_image']['type'];
+        // $error = $_FILES['post_image']['error'];
+        $image_type = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        $filename1 = strtolower(pathinfo($filename, PATHINFO_FILENAME));
+        $fileInfo = pathinfo($filename);
+        $ipath = uniqid() . '.' . $fileInfo['extension'];
+        $allow_type = array('jpeg','jpg');
+        if(in_array($image_type, $allow_type))
+        {
+            if(file_exists("./images/posts/".$filename2)){
+                unlink("./images/posts/".$filename2);
+                move_uploaded_file($tmpname, "./images/posts/".$ipath);
+            }else{
+                move_uploaded_file($tmpname, "./images/posts/".$ipath);
+            }
+            $date = date('Y-m-d');
+            $insertData = array(
+                'post_cat_id' => mysqli_real_escape_string($obj->conn, $_POST['post_cat_id']),
+                'post_title' => mysqli_real_escape_string($obj->conn, $_POST['post_title']),
+                'post_author' => mysqli_real_escape_string($obj->conn, $_POST['post_author']),
+                'post_user' => mysqli_real_escape_string($obj->conn, $userid),
+                'post_date' => mysqli_real_escape_string($obj->conn, $date),
+                'post_image' => mysqli_real_escape_string($obj->conn, $ipath),
+                'post_content' => mysqli_real_escape_string($obj->conn, $_POST['post_content']),
+                'post_tag' => mysqli_real_escape_string($obj->conn, $_POST['post_tag']),
+                'post_comment_count' => '0',
+                'post_status' => mysqli_real_escape_string($obj->conn, $_POST['post_status']),
+                'post_view_count' => '0',
+            );
+            $obj->updatePostData('tbl_posts', $insertData, $id);
+            $_SESSION['msg'] = 'Post edited successfully.';
+            header("location: http://localhost/blogproject/blogproject/admin/post.php");
+            exit();
+        }else{
+            $imageerr = "Only jpeg file is allowed!";
+        }
+}elseif(ISSET($_POST['updatepost'])){
+        $username = $_SESSION['name'];
+        $userid = $obj->getUserID('tbl_users', $username);
         $insertData = array(
             'post_cat_id' => mysqli_real_escape_string($obj->conn, $_POST['post_cat_id']),
             'post_title' => mysqli_real_escape_string($obj->conn, $_POST['post_title']),
             'post_author' => mysqli_real_escape_string($obj->conn, $_POST['post_author']),
-            'post_user' => mysqli_real_escape_string($obj->conn, $_POST['post_user']),
-            'post_date' => mysqli_real_escape_string($obj->conn, $date),
-            'post_image' => mysqli_real_escape_string($obj->conn, $_FILES['post_image']['name']),
+            'post_user' => mysqli_real_escape_string($obj->conn, $userid),
             'post_content' => mysqli_real_escape_string($obj->conn, $_POST['post_content']),
             'post_tag' => mysqli_real_escape_string($obj->conn, $_POST['post_tag']),
             'post_comment_count' => '0',
             'post_status' => mysqli_real_escape_string($obj->conn, $_POST['post_status']),
-            'post_view_count' => '0',
+            'post_view_count' => '0'
         );
-        // print_r($insertData);
-        // die;
-    $obj->updatePostData('tbl_posts', $insertData, $id);
-    header("location: http://localhost/blogproject/admin/post.php");
+        $obj->updatePostData('tbl_posts', $insertData, $id);
+        $_SESSION['msg'] = 'Post edited successfully.';
+        header("location: http://localhost/blogproject/blogproject/admin/post.php");
+        exit();
 }
 
 ?>
@@ -76,7 +123,7 @@ if(ISSET($_POST['updatepost'])){
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="dashboard.php">Dashboard</a>
                             </li>
-                            <li class="active">
+                            <li class="">
                                 <i class="fa fa-file"></i> Blank Page
                             </li>
                         </ol>
@@ -100,28 +147,28 @@ if(ISSET($_POST['updatepost'])){
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Post Title</label>
-                                <input type="text" class="form-control" name="post_title" id="" value="<?php echo $post_title; ?>" placeholder="Post Title">
+                                <input type="text" class="form-control" name="post_title" value="<?php echo $post_title; ?>" placeholder="Post Title">
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Post Author</label>
-                                <input type="text" class="form-control" name="post_author" id="" value="<?php echo $post_author; ?>" placeholder="Post Author">
+                                <input type="text" class="form-control" name="post_author" value="<?php echo $post_author; ?>" placeholder="Post Author">
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label class="" for="">Post User</label>
-                                <input type="text" class="form-control" name="post_user" id="" value="<?php echo $post_user; ?>" placeholder="Post User">
-                            </div>
+                                <input type="text" class="form-control" name="post_user" value="<?php echo $post_user; ?>" placeholder="Post User">
+                            </div> -->
                             <div class="form-group">
                                 <label class="" for="">Image</label>
-                                <input type="file" class="form-control" name="post_image" id="" value="<?php echo $post_image; ?>" placeholder="Image">
-                                <img src="./images/posts/<?php echo $post_image;?>" class="img-responsive" style="height:42px;width:71px;" alt="Image">
+                                <input type="file" class="form-control" name="post_image" value="<?php echo $post_image; ?>" placeholder="Image">
+                                <img src="./images/posts/<?php echo $post_image;?>" class="img-responsive" style="height:42px;width:71px;" alt="Post">
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Post Tag</label>
-                                <input type="text" class="form-control" name="post_tag" id="" value="<?php echo $post_tag; ?>" placeholder="Post Tag">
+                                <input type="text" class="form-control" name="post_tag" value="<?php echo $post_tag; ?>" placeholder="Post Tag">
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Post Status</label>
-                                <input type="text" class="form-control" name="post_status" id="" value="<?php echo $post_status; ?>" placeholder="Post Status">
+                                <input type="text" class="form-control" name="post_status" value="<?php echo $post_status; ?>" placeholder="Post Status">
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Post Content</label>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once "maincontroller.php";
 
 $obj = new maincontroller();
@@ -7,6 +8,30 @@ $result = $obj->fetchCategory("tbl_category");
 
 $posts = $obj->fetchAllPosts("tbl_posts");
 
+if(isset($_POST['login'])){
+  $uname = $_POST['username'];
+  $upwd = $_POST['password'];
+  if($uname == '' || $upwd == '')
+  {
+    $error = 'Username and password both is required';
+  }else{
+    $result = $obj->userlogin('tbl_users', $uname, $upwd);
+    if($result == TRUE){
+        session_start();
+        $_SESSION['name'] = $uname;
+        header("Location: http://localhost/blogproject/blogproject/users/");
+        exit;
+    }else{
+        $error = 'Invalid username or password';
+    	header("Location: ");
+    }
+  }
+    
+}
+
+if(isset($_POST['logout'])){
+    $obj->logout();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,12 +109,14 @@ $posts = $obj->fetchAllPosts("tbl_posts");
                 </h1>
 
                 <!-- First Blog Post -->
-                <?php foreach ($posts as $row){?>
+                <?php
+                if($posts){
+                foreach ($posts as $row){?>
                 <h2>
-                    <a href="#"><?php echo ucfirst($row['post_title']) ;?></a>
+                    <a href="userspost.php?edit=<?php echo $row['id'];?>"><?php echo ucfirst($row['post_title']) ;?></a>
                 </h2>
                 <p class="lead">
-                    by <a href="index.php"><?php echo ucfirst($row['post_author']) ;?></a>
+                    by <a href="userspost.php?edit=<?php echo $row['id'];?>"><?php echo ucfirst($row['post_author']) ;?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span>
                 <?php
@@ -99,13 +126,13 @@ $posts = $obj->fetchAllPosts("tbl_posts");
                 ?>
                 </p>
                 <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                <img class="img-responsive" src="../admin/images/posts/<?php echo $row['post_image']; ?>" alt="Post Image">
                 <hr>
                 <p><?php echo $row['post_content'];?></p>
                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
-                <?php } ?>
+                <?php }} ?>
                 <!-- Second Blog Post -->
                 <!-- <h2>
                     <a href="#">Blog Post Title</a>
@@ -167,15 +194,43 @@ $posts = $obj->fetchAllPosts("tbl_posts");
                     <!-- /.input-group -->
                 </div>
 
+                <!-- Login -->
+                <?php if(isset($_SESSION['name'])){?>
+                <div class="well">
+                    <form action="" method="post">
+                    <button class="btn btn-primary" type="submit" name="logout">Logout</button>
+                    </form>
+                </div>
+                <?php }else{?>
+                <div class="well">
+                    <?php if(isset($error)){?>
+                        <div class="alert alert-danger alert-block">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
+                            <?php echo $error; ?>
+                        </div>
+                    <?php }?>
+                    <h4>Login</h4>
+                    <form action="" method="post">
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+                    <button class="btn btn-primary" type="submit" name="login">Submit</button>
+                    </form>
+                    <!-- /.input-group -->
+                </div>
+                <?php } ?>
                 <!-- Blog Categories Well -->
                 <div class="well">
                     <h4>Blog Categories</h4>
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                <?php foreach($result as $row){?>
+                                <?php if($result) {foreach($result as $row){?>
                                     <li><a href="<?php echo $row['id'];?>"><?php echo $row['cat_name'];?></a></li>
-                                <?php }?>
+                                <?php }}?>
                             </ul>
                         </div>
                         <!-- /.col-lg-6 -->
@@ -213,7 +268,7 @@ $posts = $obj->fetchAllPosts("tbl_posts");
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; Your Website <?php echo date("Y");?></p>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

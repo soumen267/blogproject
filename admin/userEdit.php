@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "userController.php";
 
 $obj = new userController();
@@ -55,12 +56,16 @@ if (isset($_POST['updateuser'])) {
         $roleerr = "Role is required!";
         $err = 1;
     }
-     if($err != 1){
+     if($err != 1 && isset($_FILES['user_image']['name']) == true && $_FILES['user_image']['name']){
+        $username = $_SESSION['name'];
+        $userid = $obj->getUserID('tbl_users', $username);
+        $id = $_POST['id'];
+        $filename2 = $post_image;
         $filename = $_FILES['user_image']['name'];
         $tmpname = $_FILES['user_image']['tmp_name'];
-        $filesize = $_FILES['user_image']['size'];
-        $filetype = $_FILES['user_image']['type'];
-        $error = $_FILES['user_image']['error'];
+        // $filesize = $_FILES['user_image']['size'];
+        // $filetype = $_FILES['user_image']['type'];
+        // $error = $_FILES['user_image']['error'];
         $image_type = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
         $filename1 = strtolower(pathinfo($filename, PATHINFO_FILENAME));
         $fileInfo = pathinfo($filename);
@@ -68,8 +73,8 @@ if (isset($_POST['updateuser'])) {
         $allow_type = array('jpeg','jpg');
         if(in_array($image_type, $allow_type))
         {
-            if(file_exists("./images/users/".$filename)){
-                unlink("./images/users/".$filename);
+            if(file_exists("./images/users/".$filename2)){
+                unlink("./images/users/".$filename2);
                 move_uploaded_file($tmpname, "./images/users/".$ipath);
             }else{
                 move_uploaded_file($tmpname, "./images/users/".$ipath);
@@ -80,19 +85,32 @@ if (isset($_POST['updateuser'])) {
                 'password' => mysqli_real_escape_string($obj->conn, $_POST['password']),
                 'user_firstname' => mysqli_real_escape_string($obj->conn, $_POST['user_firstname']),
                 'user_lastname' => mysqli_real_escape_string($obj->conn, $_POST['user_lastname']),
-                'user_image' => mysqli_real_escape_string($obj->conn, $image),
+                'user_image' => mysqli_real_escape_string($obj->conn, $ipath),
                 'user_email' => mysqli_real_escape_string($obj->conn, $_POST['user_email']),
                 'user_role' => mysqli_real_escape_string($obj->conn, $_POST['user_role']),
             );
-            print_r($insertData);
-            die;
             $obj->updatePostData('tbl_users', $insertData, $id);
-            header("location: http://localhost/blogproject/admin/users.php");
+            $_SESSION['msg'] = 'User edited successfully.';
+            header("location: http://localhost/blogproject/blogproject/admin/users.php");
+            exit();
         }else{
             $imageerr = "Only jpeg file is allowed!";
         }
-    }else{
-        echo "Required";
+    }elseif(ISSET($_POST['updateuser'])){
+        $username = $_SESSION['name'];
+        $userid = $obj->getUserID('tbl_users', $username);
+        $insertData = array(
+            'username' => mysqli_real_escape_string($obj->conn, $_POST['username']),
+            'password' => mysqli_real_escape_string($obj->conn, $_POST['password']),
+            'user_firstname' => mysqli_real_escape_string($obj->conn, $_POST['user_firstname']),
+            'user_lastname' => mysqli_real_escape_string($obj->conn, $_POST['user_lastname']),
+            'user_email' => mysqli_real_escape_string($obj->conn, $_POST['user_email']),
+            'user_role' => mysqli_real_escape_string($obj->conn, $_POST['user_role']),
+        );
+        $obj->updatePostData('tbl_users', $insertData, $id);
+        $_SESSION['msg'] = 'User edited successfully.';
+        header("location: http://localhost/blogproject/blogproject/admin/users.php");
+        exit();
     }
     
 }
@@ -135,7 +153,7 @@ if (isset($_POST['updateuser'])) {
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="dashboard.php">Dashboard</a>
                             </li>
-                            <li class="active">
+                            <li class="">
                                 <i class="fa fa-file"></i> Blank Page
                             </li>
                         </ol>

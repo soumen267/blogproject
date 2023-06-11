@@ -1,8 +1,9 @@
 <?php
+session_start();
 require_once "userController.php";
 
 $obj = new userController();
-global $nameerr,$passerr,$ferr,$lerr,$emailerr,$roleerr;
+global $nameerr,$passerr,$ferr,$lerr,$emailerr,$roleerr,$imageerr;
 $err = 0;
 if (isset($_POST['submit'])) {
     $pwd = $_POST['password'];
@@ -91,14 +92,14 @@ if (isset($_POST['submit'])) {
         }
         .password-container input[type="password"],
         .password-container input[type="text"]{
-        width: 216%;
+        width: 202%;
         padding: 4px 36px 12px 12px;
         box-sizing: border-box;
         }
         .fa-eye{
         position: absolute;
         top: 57%;
-        right: -115% !important;
+        right: -100% !important;
         cursor: pointer;
         color: lightgray;
         }
@@ -126,7 +127,7 @@ if (isset($_POST['submit'])) {
                             <li>
                                 <i class="fa fa-dashboard"></i> <a href="dashboard.php">Dashboard</a>
                             </li>
-                            <li class="active">
+                            <li class="">
                                 <i class="fa fa-file"></i> Blank Page
                             </li>
                         </ol>
@@ -140,38 +141,38 @@ if (isset($_POST['submit'])) {
                             <div class="form-group">
                                 <label class="" for="">Username</label>
                                 <input type="text" class="form-control" name="username" placeholder="Username">
-                                <?php echo $nameerr ;?>
+                                <p class="text-danger"><?php echo $nameerr ;?></p>
                             </div>
                             <div class="form-group password-container">
                                 <label class="" for="">Password</label>
                                 <input type="password" class="form-control" name="password" id="password" placeholder="Password" minlength="8">
                                 <i class="fa-solid fa-eye" id="eye"></i>
-                                <?php echo $passerr ;?>
+                                <p class="text-danger"><?php echo $passerr ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Firstname</label>
                                 <input type="text" class="form-control" name="user_firstname" placeholder="Firstname">
-                                <?php echo $ferr ;?>
+                                <p class="text-danger"><?php echo $ferr ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Lastname</label>
                                 <input type="text" class="form-control" name="user_lastname" placeholder="Lastname">
-                                <?php echo $lerr ;?>
+                                <p class="text-danger"><?php echo $lerr ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Email</label>
                                 <input type="email" class="form-control" name="user_email" placeholder="Email">
-                                <?php echo $emailerr ;?>
+                                <p class="text-danger"><?php echo $emailerr ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Role</label>
                                 <input type="text" class="form-control" name="user_role" placeholder="Role">
-                                <?php echo $roleerr ;?>
+                                <p class="text-danger"><?php echo $roleerr ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Image</label>
                                 <input type="file" class="form-control" name="user_image" placeholder="Image">
-                                
+                                <p class="text-danger"><?php echo $imageerr ;?></p>
                             </div>
                             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                         </form>

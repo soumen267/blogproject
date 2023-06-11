@@ -1,9 +1,19 @@
 <?php
+session_start();
 require_once "userController.php";
 
 $obj = new userController();
 
-$result = $obj->fetchAllUsers('tbl_users');
+$username = $_SESSION['name'];
+
+$res1 = $obj->isAdmin('tbl_users',$username);
+if(!$res1){
+    $result = $obj->fetchLoggedInUser('tbl_users',$username);
+}else{
+    $result = $obj->fetchAllUsers('tbl_users');
+    
+}
+
 
 if(isset($_POST['delete'])){
     $id = $_POST['id'];
@@ -58,6 +68,21 @@ if(isset($_POST['delete'])){
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
+                    <?php if(isset($_SESSION['msg'])){?>
+                            <div class="alert alert-success alert-block">
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                                <?php echo $_SESSION['msg'];
+                                    unset($_SESSION['msg']);
+                                ?>
+                            </div>
+                        <?php }elseif(isset($_SESSION['added'])){ ?>
+                            <div class="alert alert-success alert-block">
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                                <?php echo $_SESSION['added'];
+                                    unset($_SESSION['added']);
+                                ?>
+                            </div>
+                        <?php } ?>
                         <h1 class="page-header">
                             Users
                             <small>Subheading</small>
@@ -66,7 +91,7 @@ if(isset($_POST['delete'])){
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="dashboard.php">Dashboard</a>
                             </li>
-                            <li class="active">
+                            <li class="">
                                 <i class="fa fa-file"></i> Blank Page
                             </li>
                         </ol>
@@ -82,12 +107,12 @@ if(isset($_POST['delete'])){
                             <thead>
                                 <tr>
                                     <th>#ID</th>
+                                    <th>Username</th>
                                     <th>Firstname</th>
                                     <th>Lastname</th>
                                     <th>Email</th>
                                     <th>Role</th>
                                     <th>Image</th>
-                                    <th>Status</th>
                                     <th colspan="2">Action</th>
                                 </tr>
                             </thead>
@@ -99,6 +124,7 @@ if(isset($_POST['delete'])){
                                 ?>
                                 <tr>
                                     <td><?php echo $row['user_id'];?></td>
+                                    <td><?php echo $row['username'];?></td>
                                     <td><?php echo $row['user_firstname'];?></td>
                                     <td><?php echo $row['user_lastname'];?></td>
                                     <td><?php echo $row['user_email'];?></td>
@@ -106,8 +132,8 @@ if(isset($_POST['delete'])){
                                     <td>                                    
                                     <img src="./images/users/<?php echo $row['user_image'];?>" class="img-responsive" style="height:42px;width:71px;" alt="Image">
                                     </td>
-                                    <td>
-                                    <?php if($row['status'] != 1){
+                                    <!-- <td>
+                                    <--?php if($row['status'] != 1){
                                         echo 
                                         "<a href=deactivate.php?id=".$row['user_id']." class='btn red'>Deactivate</a>";
                                     }else{ 
@@ -115,15 +141,17 @@ if(isset($_POST['delete'])){
                                         "<a href=activate.php?id=".$row['user_id']." class='btn green'>Activate</a>";
                                     }                                   
                                     ?>
-                                    </td>
+                                    </td> -->
                                     <td>
                                     <a href="userEdit.php?edit=<?php echo $row['user_id'];?>"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                                    <?php if($res1){?>
                                     <td>
                                     <form action="" method="post">
                                         <input type="hidden" name="id" value="<?php echo $row['user_id'];?>">
                                         <button type="submit" name="delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form>
                                     </td>
+                                    <?php }?>
                                 </tr>
                                 <?php }?>
                             </tbody>

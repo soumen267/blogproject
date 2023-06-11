@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once "postController.php";
 include_once "userController.php";
 
@@ -8,6 +9,7 @@ $obj1 = new userController();
 $countPosts = $obj->countData('tbl_posts');
 $countUser = $obj1->countData('tbl_users');
 $countCategory = $obj->countData('tbl_category');
+$countComments = $obj->countData('tbl_comments');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +39,8 @@ $countCategory = $obj->countData('tbl_category');
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Welcome to Admin
-                            <small><?php if(isset($_SESSION['name']))
+                            <small><?php
+                            if(isset($_SESSION['name']))
                             {
                             echo ucfirst($_SESSION['name']);
                             }?></small>
@@ -89,7 +92,7 @@ $countCategory = $obj->countData('tbl_category');
                                         <i class="fa fa-comments fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                    <div class='huge'>23</div>
+                                    <div class='huge'><?php echo $countComments ? ''.$countComments.'' :'0'; ?></div>
                                     <div>Comments</div>
                                     </div>
                                 </div>
@@ -174,9 +177,9 @@ $countCategory = $obj->countData('tbl_category');
           ['Data', 'Count'],
           ['Posts', 100],
         <?php
-            $eletext = ['Active Posts','Categories','Users'];
-            $elecount = [$countPosts, $countCategory, $countUser];
-            for($i=0; $i<3;$i++){
+            $eletext = ['Active Posts','Comments', 'Categories','Users'];
+            $elecount = [$countPosts, $countComments, $countCategory, $countUser];
+            for($i=0; $i<4;$i++){
                 echo "['{$eletext[$i]}'". "," . "{$elecount[$i]}],";
             }
 
