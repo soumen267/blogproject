@@ -1,23 +1,22 @@
 <?php
 session_start();
-require_once "userController.php";
+include "../maincontroller.php";
 
-$obj = new userController();
+$obj = new maincontroller();
 
-$username = $_SESSION['name'];
-
+$username = $obj->loggedinUsername();
 $res1 = $obj->isAdmin('tbl_users',$username);
 if(!$res1){
     $result = $obj->fetchLoggedInUser('tbl_users',$username);
 }else{
-    $result = $obj->fetchAllUsers('tbl_users');
+    $result = $obj->fetchAllData('tbl_users');
     
 }
 
 
 if(isset($_POST['delete'])){
     $id = $_POST['id'];
-    $obj->deleteuser('tbl_users', $id);
+    $obj->deletedata('tbl_users', 'user_id', $id);
 }
 
 ?>

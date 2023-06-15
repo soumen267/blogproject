@@ -1,8 +1,8 @@
 <?php
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
-include "userController.php";
-$obj = new userController();
+include "../maincontroller.php";
+$obj = new maincontroller();
 global $error;
 if(ISSET($_POST['submit'])){
         
@@ -16,7 +16,7 @@ if(ISSET($_POST['submit'])){
         $auth = $obj->login('tbl_users', $username, $password);
         if(!$auth){
             $error = 'Invalid username or password';
-            header('location:http://localhost/blogproject/blogproject/admin/');
+            header('location:http://localhost/blogproject/admin/');
         }
         else{
                 $auth1 = $obj->isAdmin('tbl_users', $username);

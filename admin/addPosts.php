@@ -1,7 +1,7 @@
 <?php
-require_once "postController.php";
+require_once "../maincontroller.php";
 session_start();
-$obj = new postController();
+$obj = new maincontroller();
 global $cateerrors, $titleerrors, $authorerrors,$usererrors,$contenterrors,$tagerrors,$statuserrors;
 $err = 0;
 if (isset($_POST['post'])) {
@@ -17,20 +17,12 @@ if (isset($_POST['post'])) {
         $authorerrors = "Post author is required!";
         $err = 1;
     }
-    if($_POST['post_user'] == '' || empty($_POST['post_user'])){
-        $usererrors = "Post user is required!";
-        $err = 1;
-    }
     if($_POST['post_content'] == '' || empty($_POST['post_content'])){
         $contenterrors = "Post user is required!";
         $err = 1;
     }
     if($_POST['post_tag'] == '' || empty($_POST['post_tag'])){
         $tagerrors = "Post user is required!";
-        $err = 1;
-    }
-    if($_POST['post_status'] == '' || empty($_POST['post_status'])){
-        $statuserrors = "Post status is required!";
         $err = 1;
     }
      if($err != 1 && isset($_FILES['post_image']['name'])){
@@ -44,25 +36,26 @@ if (isset($_POST['post'])) {
         {
         move_uploaded_file($_FILES['post_image']['tmp_name'],'images/posts/'.$filename);
         $date = date('Y-m-d');
+        $username = $_SESSION['name'];
+        $userid = $obj->getUserID('tbl_users', $username);
         $insertData = array(
             'post_cat_id' => mysqli_real_escape_string($obj->conn, $_POST['post_cat_id']),
             'post_title' => mysqli_real_escape_string($obj->conn, $_POST['post_title']),
             'post_author' => mysqli_real_escape_string($obj->conn, $_POST['post_author']),
-            'post_user' => mysqli_real_escape_string($obj->conn, $_POST['post_user']),
+            'post_user' => mysqli_real_escape_string($obj->conn, $userid),
             'post_date' => mysqli_real_escape_string($obj->conn, $date),
-            'post_image' => mysqli_real_escape_string($obj->conn, $_FILES['post_image']['name']),
+            'post_image' => mysqli_real_escape_string($obj->conn, $ipath),
             'post_content' => mysqli_real_escape_string($obj->conn, $_POST['post_content']),
             'post_tag' => mysqli_real_escape_string($obj->conn, $_POST['post_tag']),
-            'post_status' => mysqli_real_escape_string($obj->conn, $_POST['post_status'])
         );
-        $obj->insertPostData('tbl_posts', $insertData);
+        $obj->insertUserData('tbl_posts', $insertData);
         $_SESSION['added'] = 'Post added successfully.';
-        header("location: http://localhost/blogproject/blogproject/admin/post.php");
+        header("location: http://localhost/blogproject/admin/post.php");
         exit();
     }
     }    
 }
-$result = $obj->fetchByCategory('tbl_category');
+$result = $obj->fetchAllUsers('tbl_category');
 
 ?>
 
@@ -139,15 +132,6 @@ $result = $obj->fetchByCategory('tbl_category');
                                 <?php echo $authorerrors ;?>
                             </div>
                             <div class="form-group">
-                                <label class="" for="">Post User</label>
-                                <input type="text" class="form-control" name="post_user" id="" placeholder="Post User">
-                                <?php echo $usererrors ;?>
-                            </div>
-                            <!-- <div class="form-group">
-                                <label class="" for="">Post Date</label>
-                                <input type="date" class="form-control" name="post_date" id="" placeholder="Post Date">
-                            </div> -->
-                            <div class="form-group">
                                 <label class="" for="">Image</label>
                                 <input type="file" class="form-control" name="post_image" id="" placeholder="Image">
                                 
@@ -156,11 +140,6 @@ $result = $obj->fetchByCategory('tbl_category');
                                 <label class="" for="">Post Tag</label>
                                 <input type="text" class="form-control" name="post_tag" id="" placeholder="Post Tag">
                                 <?php echo $tagerrors ;?>
-                            </div>
-                            <div class="form-group">
-                                <label class="" for="">Post Status</label>
-                                <input type="text" class="form-control" name="post_status" id="" placeholder="Post Status">
-                                <?php echo $statuserrors ;?>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Post Content</label>

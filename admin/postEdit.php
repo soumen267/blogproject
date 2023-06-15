@@ -2,10 +2,9 @@
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
 session_start();
-require_once "postController.php";
-//require_once "../helper.php";
+require_once "../maincontroller.php";
 
-$obj = new postController();
+$obj = new maincontroller();
 if(ISSET($_GET['edit'])){
     $id = $_GET['edit'];
     $result = $obj->fetchPostsByID('tbl_posts', 'tbl_category', $id);
@@ -22,10 +21,8 @@ if(ISSET($_GET['edit'])){
         $post_content = $row['post_content'];
     }
 }
-$result1 = $obj->fetchByCategory('tbl_category');
+$result1 = $obj->fetchAllData('tbl_category');
 if(isset($_FILES['post_image']['name']) == true && $_FILES['post_image']['name']){
-        $username = $_SESSION['name'];
-        $userid = $obj->getUserID('tbl_users', $username);
         $id = $_POST['id'];
         $filename2 = $post_image;
         $filename = $_FILES['post_image']['name'];
@@ -51,7 +48,6 @@ if(isset($_FILES['post_image']['name']) == true && $_FILES['post_image']['name']
                 'post_cat_id' => mysqli_real_escape_string($obj->conn, $_POST['post_cat_id']),
                 'post_title' => mysqli_real_escape_string($obj->conn, $_POST['post_title']),
                 'post_author' => mysqli_real_escape_string($obj->conn, $_POST['post_author']),
-                'post_user' => mysqli_real_escape_string($obj->conn, $userid),
                 'post_date' => mysqli_real_escape_string($obj->conn, $date),
                 'post_image' => mysqli_real_escape_string($obj->conn, $ipath),
                 'post_content' => mysqli_real_escape_string($obj->conn, $_POST['post_content']),
@@ -60,30 +56,28 @@ if(isset($_FILES['post_image']['name']) == true && $_FILES['post_image']['name']
                 'post_status' => mysqli_real_escape_string($obj->conn, $_POST['post_status']),
                 'post_view_count' => '0',
             );
-            $obj->updatePostData('tbl_posts', $insertData, $id);
+            $obj->updateData('tbl_posts', $insertData, 'id', $id);
             $_SESSION['msg'] = 'Post edited successfully.';
-            header("location: http://localhost/blogproject/blogproject/admin/post.php");
+            header("location: http://localhost/blogproject/admin/post.php");
             exit();
         }else{
             $imageerr = "Only jpeg file is allowed!";
         }
 }elseif(ISSET($_POST['updatepost'])){
-        $username = $_SESSION['name'];
-        $userid = $obj->getUserID('tbl_users', $username);
+        $id = $_POST['id'];
         $insertData = array(
             'post_cat_id' => mysqli_real_escape_string($obj->conn, $_POST['post_cat_id']),
             'post_title' => mysqli_real_escape_string($obj->conn, $_POST['post_title']),
             'post_author' => mysqli_real_escape_string($obj->conn, $_POST['post_author']),
-            'post_user' => mysqli_real_escape_string($obj->conn, $userid),
             'post_content' => mysqli_real_escape_string($obj->conn, $_POST['post_content']),
             'post_tag' => mysqli_real_escape_string($obj->conn, $_POST['post_tag']),
             'post_comment_count' => '0',
             'post_status' => mysqli_real_escape_string($obj->conn, $_POST['post_status']),
             'post_view_count' => '0'
         );
-        $obj->updatePostData('tbl_posts', $insertData, $id);
+        $obj->updateData('tbl_posts', $insertData, 'id',$id);
         $_SESSION['msg'] = 'Post edited successfully.';
-        header("location: http://localhost/blogproject/blogproject/admin/post.php");
+        header("location: http://localhost/blogproject/admin/post.php");
         exit();
 }
 

@@ -1,10 +1,10 @@
 <?php
 session_start();
-include_once "maincontroller.php";
+include_once "../maincontroller.php";
 $obj = new maincontroller();
 if(isset($_REQUEST['edit'])){
     $id = $_REQUEST['edit'];
-    $result = $obj->fetchPostsByID('tbl_posts',$id);
+    $result = $obj->fetchPostsByID('tbl_posts','tbl_category',$id);
 
     foreach($result as $row){
         $post_title = $row['post_title'];
@@ -20,13 +20,13 @@ if(ISSET($_SESSION['name'])){
 }
 
 if(isset($_POST['comment'])){
-    $userid = $obj->getUserID('tbl_users',$username);
+    $userid = $obj->loggedinUserId();
     $insertData = array(
         'post_id' => mysqli_real_escape_string($obj->conn, $_POST['post_id']),
         'comment_content' => mysqli_real_escape_string($obj->conn, $_POST['comment_content']),
         'user_id' => mysqli_real_escape_string($obj->conn, $userid)
     );
-    $result = $obj->addComment('tbl_comments', $insertData);
+    $result = $obj->insertData('tbl_comments', $insertData);
     header("Location: ");
 }
 if(isset($_REQUEST['edit'])){

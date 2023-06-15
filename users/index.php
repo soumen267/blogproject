@@ -1,12 +1,14 @@
 <?php
 session_start();
-include_once "maincontroller.php";
+require_once "../maincontroller.php";
 
 $obj = new maincontroller();
 
-$result = $obj->fetchCategory("tbl_category");
+$result = $obj->fetchAllData("tbl_category");
 
-$posts = $obj->fetchAllPosts("tbl_posts");
+$posts = $obj->fetchAllData("tbl_posts");
+$username = $obj->loggedinUsername();
+$userrole = $obj->loggedInUserRole('tbl_users',$username);
 
 if(isset($_POST['login'])){
   $uname = $_POST['username'];
@@ -15,11 +17,11 @@ if(isset($_POST['login'])){
   {
     $error = 'Username and password both is required';
   }else{
-    $result = $obj->userlogin('tbl_users', $uname, $upwd);
+    $result = $obj->login('tbl_users', $uname, $upwd);
     if($result == TRUE){
         session_start();
         $_SESSION['name'] = $uname;
-        header("Location: http://localhost/blogproject/blogproject/users/");
+        header("Location: http://localhost/blogproject/users/");
         exit;
     }else{
         $error = 'Invalid username or password';
@@ -195,7 +197,7 @@ if(isset($_POST['logout'])){
                 </div>
 
                 <!-- Login -->
-                <?php if(isset($_SESSION['name'])){?>
+                <?php if(isset($_SESSION['name']) && !$userrole){?>
                 <div class="well">
                     <form action="" method="post">
                     <button class="btn btn-primary" type="submit" name="logout">Logout</button>

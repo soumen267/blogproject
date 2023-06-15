@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once "userController.php";
+include "../maincontroller.php";
 
-$obj = new userController();
+$obj = new maincontroller();
 global $nameerr,$passerr,$ferr,$lerr,$emailerr,$roleerr,$imageerr;
 $err = 0;
 if (isset($_POST['submit'])) {
@@ -63,8 +63,8 @@ if (isset($_POST['submit'])) {
                 'user_email' => mysqli_real_escape_string($obj->conn, $_POST['user_email']),
                 'user_role' => mysqli_real_escape_string($obj->conn, $_POST['user_role']),
             );
-            $obj->insertUserData('tbl_users', $insertData);
-
+            $obj->insertData('tbl_users', $insertData);
+            header("location: http://localhost/blogproject/admin/users.php");
         }else{
             $imageerr = "Only jpeg file is allowed!";
         }
@@ -166,7 +166,11 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Role</label>
-                                <input type="text" class="form-control" name="user_role" placeholder="Role">
+                                <select name="user_role" id="input" class="form-control" required="required">
+                                    <option value="">Select</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="user">User</option>
+                                </select>
                                 <p class="text-danger"><?php echo $roleerr ;?></p>
                             </div>
                             <div class="form-group">

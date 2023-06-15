@@ -1,13 +1,11 @@
 <?php
 session_start();
-include_once "postController.php";
-include_once "userController.php";
+include_once "../maincontroller.php";
 
-$obj = new postController();
-$obj1 = new userController();
+$obj = new maincontroller();
 
 $countPosts = $obj->countData('tbl_posts');
-$countUser = $obj1->countData('tbl_users');
+$countUser = $obj->countData('tbl_users');
 $countCategory = $obj->countData('tbl_category');
 $countComments = $obj->countData('tbl_comments');
 ?>

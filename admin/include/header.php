@@ -1,6 +1,6 @@
 <?php
-include "studentController.php";
-$obj = new studentController();
+include_once "../maincontroller.php";
+$obj = new maincontroller();
 
 if(ISSET($_POST['logout'])){
     $log = $obj->logout();

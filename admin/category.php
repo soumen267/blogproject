@@ -1,7 +1,7 @@
 <?php
-require_once "blogcontroller.php";
+require_once "../maincontroller.php";
 
-$obj = new blogcontroller();
+$obj = new maincontroller();
 global $errors;
 if(ISSET($_POST['cat_name'])){
     
@@ -11,29 +11,26 @@ if(ISSET($_POST['cat_name'])){
         $insertData = array(
         'cat_name' => mysqli_real_escape_string($obj->conn, $_POST['cat_name'])
     );
-        $obj->categoryinsert('tbl_category',$insertData);
+        $obj->insertData('tbl_category',$insertData);
     }
     
     
 }
-$result = $obj->fetchCategoryAll('tbl_category');
+$result = $obj->fetchAllData('tbl_category');
 
 if(isset($_GET['edit'])){
     $id = $_GET['edit'];
-    $catedit = $obj->edit('tbl_category', $id);
-    // foreach($catedit as $row){
-    //     $cat_name = $row['cat_name'];
-    // }
+    $catedit = $obj->fetchDataByID('tbl_category', 'id', $id);
     
 }
 if(isset($_POST['update'])){
-    $id = $_GET['edit'];
+    $id = $_POST['id'];
     $data = array(
         'cat_name' => mysqli_real_escape_string($obj->conn, $_POST['cat_name'])
     );
     
-    $cat_update = $obj->update('tbl_category',$data,$id);
-    
+    $cat_update = $obj->updateData('tbl_category',$data,'id',$id);
+    header('location: http://localhost/blogproject/admin/category.php');
 }
 
 ?>
@@ -72,27 +69,48 @@ if(isset($_POST['update'])){
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="dashboard.php">Dashboard</a>
                             </li>
-                            <li class="active">
+                            <li class="">
                                 <i class="fa fa-file"></i> Blank Page
                             </li>
                         </ol>
                     </div>
                     
                 </div>
-                <!-- /.row --> 
+                <!-- /.row -->
                 <div class="row">
+                <?php if(isset($_GET['edit'])){?>
+                <div class="col-lg-6">
+                <p>Edit</p>
+                            <p style="color:red;"><?php echo $errors; ?></p>
+                    
+                        <form action="" method="POST" class="form-inline" role="form">
+                            <div class="form-group">
+                                <label class="sr-only" for="">label</label>
+                                <?php foreach($catedit as $row){?>
+                                <input type="hidden" name="id" value="<?php echo $id;?>">
+                                
+                                <input type="text" class="form-control" name="cat_name" value="<?php echo $row['cat_name'] ?>" placeholder="Category Name">
+                                <?php } ?>
+                            </div>
+                            <button type="submit" name="update" class="btn btn-primary">Update</button>
+                        </form>
+                        
+                </div>
+                <div class="row">
+                <?php }else{?>
                 <div class="col-lg-6">
                         <p style="color:red;"><?php echo $errors; ?></p>
                    
                     <form action="" method="POST" class="form-inline" role="form">
                         <div class="form-group">
                             <label class="sr-only" for="">label</label>
-                            <input type="text" class="form-control" name="cat_name" id="" placeholder="Category Name">
+                            <input type="text" class="form-control" name="cat_name" placeholder="Category Name">
                         </div>
-                        <button type="submit" name="cat-btn" class="btn btn-primary">Submit</button>
+                        <button type="submit" name="cat-btn" class="btn btn-primary">Add</button>
                     </form>
                     
                 </div>
+                <?php } ?>
                 <div class="col-lg-6">
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -124,27 +142,6 @@ if(isset($_POST['update'])){
                     </div>
                 </div>
             </div>
-            <?php if(isset($_GET['edit'])){?>
-            <div class="row">
-            <div class="col-lg-3">
-            <p>Edit</p>
-                        <p style="color:red;"><?php echo $errors; ?></p>
-                   
-                    <form action="" method="POST" class="form-inline" role="form">
-                        <div class="form-group">
-                            <label class="sr-only" for="">label</label>
-                            <?php foreach($catedit as $row){?>
-                            <input type="hidden" name="id" value="<?php echo $id;?>">
-                            
-                            <input type="text" class="form-control" name="cat_name" value="<?php echo $row['cat_name'] ?>" placeholder="Category Name">
-                            <?php } ?>
-                        </div>
-                        <button type="submit" name="update" class="btn btn-primary">Update</button>
-                    </form>
-                    
-            </div>
-            </div>
-            <?php } ?>
             <!-- /.container-fluid -->
 
         </div>

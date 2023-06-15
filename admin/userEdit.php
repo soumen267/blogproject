@@ -1,11 +1,11 @@
 <?php
 session_start();
-require_once "userController.php";
+require_once "../maincontroller.php";
 
-$obj = new userController();
+$obj = new maincontroller();
 if(ISSET($_GET['edit'])){
     $id = $_GET['edit'];
-    $result = $obj->fetchUsersByID('tbl_users', $id);
+    $result = $obj->fetchDataByID('tbl_users', 'user_id', $id);
     foreach($result as $row){
         $post_id = $row['user_id'];
         $username = $row['username'];
@@ -57,8 +57,6 @@ if (isset($_POST['updateuser'])) {
         $err = 1;
     }
      if($err != 1 && isset($_FILES['user_image']['name']) == true && $_FILES['user_image']['name']){
-        $username = $_SESSION['name'];
-        $userid = $obj->getUserID('tbl_users', $username);
         $id = $_POST['id'];
         $filename2 = $post_image;
         $filename = $_FILES['user_image']['name'];
@@ -89,16 +87,14 @@ if (isset($_POST['updateuser'])) {
                 'user_email' => mysqli_real_escape_string($obj->conn, $_POST['user_email']),
                 'user_role' => mysqli_real_escape_string($obj->conn, $_POST['user_role']),
             );
-            $obj->updatePostData('tbl_users', $insertData, $id);
+            $obj->updateData('tbl_users', $insertData, 'user_id', $id);
             $_SESSION['msg'] = 'User edited successfully.';
-            header("location: http://localhost/blogproject/blogproject/admin/users.php");
+            header("location: http://localhost/blogproject/admin/users.php");
             exit();
         }else{
             $imageerr = "Only jpeg file is allowed!";
         }
     }elseif(ISSET($_POST['updateuser'])){
-        $username = $_SESSION['name'];
-        $userid = $obj->getUserID('tbl_users', $username);
         $insertData = array(
             'username' => mysqli_real_escape_string($obj->conn, $_POST['username']),
             'password' => mysqli_real_escape_string($obj->conn, $_POST['password']),
@@ -107,9 +103,9 @@ if (isset($_POST['updateuser'])) {
             'user_email' => mysqli_real_escape_string($obj->conn, $_POST['user_email']),
             'user_role' => mysqli_real_escape_string($obj->conn, $_POST['user_role']),
         );
-        $obj->updatePostData('tbl_users', $insertData, $id);
+        $obj->updateData('tbl_users', $insertData, 'user_id', $id);
         $_SESSION['msg'] = 'User edited successfully.';
-        header("location: http://localhost/blogproject/blogproject/admin/users.php");
+        header("location: http://localhost/blogproject/admin/users.php");
         exit();
     }
     

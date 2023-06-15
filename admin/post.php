@@ -2,9 +2,9 @@
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
 session_start();
-require_once "postController.php";
+require_once "../maincontroller.php";
 
-$obj = new postController();
+$obj = new maincontroller();
 global $errors;
 
 $name = $_SESSION['name'];
@@ -12,7 +12,7 @@ $result = $obj->fetchAllPosts('tbl_posts', 'tbl_category', 'tbl_users', $name);
 
 if(ISSET($_POST['id'])){
     $id = $_POST['id'];
-    $result = $obj->deleteData('tbl_posts', $id);
+    $result = $obj->deletedata('tbl_posts', 'id', $id);
     echo "Deleted:";
 }
 
