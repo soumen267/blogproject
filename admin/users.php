@@ -14,9 +14,10 @@ if(!$res1){
 }
 
 
-if(isset($_POST['delete'])){
+if(isset($_POST['id'])){
     $id = $_POST['id'];
     $obj->deletedata('tbl_users', 'user_id', $id);
+    echo "Deleted:";
 }
 
 ?>
@@ -31,6 +32,8 @@ if(isset($_POST['delete'])){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
+    <link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" />
     <style>
         btn{
             background-color: red;
@@ -50,6 +53,15 @@ if(isset($_POST['delete'])){
         }
         .red{
             background-color: red;
+        }
+        .btndelete{
+            border: none;
+            background: none;
+            color: red;
+        }
+        .btndelete:hover {
+            color: red;
+            transition: 0.7s;
         }
     </style>
 </head>
@@ -121,7 +133,7 @@ if(isset($_POST['delete'])){
                                 // print_r($row);
                                 // die();
                                 ?>
-                                <tr>
+                                <tr id="row<?php echo $row['user_id'];?>">
                                     <td><?php echo $row['user_id'];?></td>
                                     <td><?php echo $row['username'];?></td>
                                     <td><?php echo $row['user_firstname'];?></td>
@@ -142,13 +154,14 @@ if(isset($_POST['delete'])){
                                     ?>
                                     </td> -->
                                     <td>
-                                    <a href="userEdit.php?edit=<?php echo $row['user_id'];?>"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                                    <a href="userEdit.php?edit=<?php echo $row['user_id'];?>"><i class="fa fa-edit" aria-hidden="true" title="edit"></i></a></td>
                                     <?php if($res1){?>
                                     <td>
-                                    <form action="" method="post">
+                                    <!-- <form action="" method="post">
                                         <input type="hidden" name="id" value="<?php echo $row['user_id'];?>">
                                         <button type="submit" name="delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    </form>
+                                    </form> -->
+                                    <a href="javascript:void(0)" data-id="<?php echo $row['user_id'];?>" class="btndelete"><i class="fa fa-trash" aria-hidden="true" title="delete"></i></a></td>
                                     </td>
                                     <?php }?>
                                 </tr>
@@ -168,7 +181,46 @@ if(isset($_POST['delete'])){
 
     <!-- jQuery -->
     <?php include "include/footer.php" ?>
+    <script>
+         $(".btndelete").click(function(){
+            //var id = $(this).parents("tr").attr("id");
+            var id = $(this).data("id");
 
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel plx!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+
+            function(isConfirm) {
+            if (isConfirm) {
+            
+            $.ajax({
+                url: 'users.php/'+id,
+                type: 'POST',
+                data: {"id":id},
+                error: function() {
+                    alert('Something is wrong');
+                },
+                success: function(data) {
+                    $("#row"+id).remove();
+                    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                    //location.reload();
+                }
+            });
+
+            } else {
+                swal("Cancelled", "Your imaginary file is safe :)", "error");
+            }
+            });
+        });
+    </script>
 </body>
 
 </html>

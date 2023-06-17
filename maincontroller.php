@@ -6,7 +6,7 @@ class maincontroller extends database{
         $res = "SELECT * FROM $table_name WHERE `username` = '$uname' AND `password` = '$upwd'";
         $res = mysqli_query($this->conn, $res);
         if(mysqli_num_rows($res) > 0){
-            $_SESSION['name']=$uname; 
+            $_SESSION['name']=$uname;
             return true;
         }else{
             return false;
@@ -181,8 +181,7 @@ class maincontroller extends database{
         }
     }
     public function logout(){
-        $username = $_SESSION['name'];
-        $sql = "SELECT `user_role` FROM `tbl_users` WHERE `username` = '$username'";
+        $sql = "SELECT `user_role` FROM `tbl_users` WHERE `username` = 'loggedinUsername()'";
         $res = $this->conn->query($sql);
         if(mysqli_num_rows($res) > 0){
             foreach($res as $val){
@@ -250,6 +249,26 @@ class maincontroller extends database{
             }elseif($role == 'admin'){
                 return true;
             }
+        }
+    }
+
+    function usernameExists($username){
+        $sql = "SELECT `username` FROM `tbl_users` WHERE `username` = '$username'";
+        $res = $this->conn->query($sql);
+        if(mysqli_num_rows($res) > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function emailExists($email){
+        $sql = "SELECT `user_email` FROM `tbl_users` WHERE `user_email` = '$email'";
+        $res = $this->conn->query($sql);
+        if(mysqli_num_rows($res) > 0){
+            return true;
+        }else{
+            return false;
         }
     }
 

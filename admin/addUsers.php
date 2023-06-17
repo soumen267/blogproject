@@ -11,9 +11,13 @@ if (isset($_POST['submit'])) {
     $lower = preg_match('@[a-z]@', $pwd);
     $number = preg_match('@[0-9]@', $pwd);
     $specialchr = preg_match('@[^\w]@', $pwd);
-
+    $uname = $obj->usernameExists($_POST['username']);
+    $uemail = $obj->emailExists($_POST['user_email']);
     if ($_POST['username'] == '' || empty($_POST['username'])) {
         $nameerr = "Username is required!";
+        $err = 1;
+    }elseif ($uname == TRUE){
+        $nameerr = "Username is already exists";
         $err = 1;
     }
     if($_POST['password'] == '' || empty($_POST['password'])){
@@ -33,6 +37,9 @@ if (isset($_POST['submit'])) {
     }
     if($_POST['user_email'] == '' || empty($_POST['user_email'])){
         $emailerr = "Email is required!";
+        $err = 1;
+    }elseif ($uemail == TRUE){
+        $emailerr = "Email is already exists";
         $err = 1;
     }
     if($_POST['user_role'] == '' || empty($_POST['user_role'])){

@@ -32,7 +32,11 @@ if(isset($_POST['update'])){
     $cat_update = $obj->updateData('tbl_category',$data,'id',$id);
     header('location: http://localhost/blogproject/admin/category.php');
 }
-
+if(isset($_POST['id'])){
+    $id = $_POST['id'];
+    $obj->deletedata('tbl_category', 'id', $id);
+    echo "Deleted:";
+}
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +49,19 @@ if(isset($_POST['update'])){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
+    <link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" />
+    <style>
+        .btndelete{
+            border: none;
+            background: none;
+            color: red;
+        }
+        .btndelete:hover {
+            color: red;
+            transition: 0.7s;
+        }
+    </style>
 </head>
 
 <body>
@@ -124,16 +140,17 @@ if(isset($_POST['update'])){
                             <tbody>
                                 <?php
                                 foreach ($result as $row){?>
-                                <tr>
+                                <tr id="row<?php echo $row['id'];?>">
                                     <td><?php echo $row['id'];?></td>
                                     <td><?php echo $row['cat_name'];?></td>
                                     <td>
-                                    <a href="category.php?edit=<?php echo $row['id'];?>"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                                    <a href="category.php?edit=<?php echo $row['id'];?>"><i class="fa fa-edit" aria-hidden="true" title="edit"></i></a></td>
                                     <td>
-                                    <form action="" method="post">
+                                    <!-- <form action="" method="post">
                                         <input type="hidden" name="id" value="<?php echo $row['id'];?>">
                                         <button type="submit" name="delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    </form>
+                                    </form> -->
+                                    <a href="javascript:void(0)" data-id="<?php echo $row['id'];?>" class="btndelete"><i class="fa fa-trash" aria-hidden="true" title="delete"></i></a></td>
                                     </td>
                                 </tr>
                                 <?php }?>
@@ -152,7 +169,46 @@ if(isset($_POST['update'])){
 
     <!-- jQuery -->
     <?php include "include/footer.php" ?>
+    <script>
+         $(".btndelete").click(function(){
+            //var id = $(this).parents("tr").attr("id");
+            var id = $(this).data("id");
 
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel plx!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+
+            function(isConfirm) {
+            if (isConfirm) {
+            
+            $.ajax({
+                url: 'category.php/'+id,
+                type: 'POST',
+                data: {"id":id},
+                error: function() {
+                    alert('Something is wrong');
+                },
+                success: function(data) {
+                    $("#row"+id).remove();
+                    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                    //location.reload();
+                }
+            });
+
+            } else {
+                swal("Cancelled", "Your imaginary file is safe :)", "error");
+            }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -1,9 +1,9 @@
 <?php
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
-session_start();
+ 
 require_once "../maincontroller.php";
-
+session_start(); 
 $obj = new maincontroller();
 global $errors;
 
@@ -32,6 +32,7 @@ if(ISSET($_POST['id'])){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
     <link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" />
+    
 <style>
 .btndelete{
     border: none;
@@ -88,7 +89,7 @@ if(ISSET($_POST['id'])){
                 
                 <div class="col-lg-12">
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover display">
                             <thead>
                                 <tr>
                                     <th>#ID</th>
@@ -202,5 +203,4 @@ if(ISSET($_POST['id'])){
 // });
 </script>
 </body>
-
 </html>
