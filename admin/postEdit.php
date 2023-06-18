@@ -6,6 +6,10 @@ require_once "../maincontroller.php";
 
 $obj = new maincontroller();
 if(ISSET($_GET['edit'])){
+    // global $id;
+    // if(isset($_GET['view'])){
+    //     $id = $_GET['view'];
+    // }
     $id = $_GET['edit'];
     $result = $obj->fetchPostsByID('tbl_posts', 'tbl_category', $id);
         

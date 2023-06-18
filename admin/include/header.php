@@ -1,11 +1,17 @@
 <?php
 include_once "../maincontroller.php";
+
+
 $obj = new maincontroller();
+
+$obj->redirectIfNotLogin();
 
 if(ISSET($_POST['logout'])){
     $log = $obj->logout();
 }
 $activePage = basename($_SERVER['PHP_SELF'], ".php");
+
+$countPostDraft = $obj->countDataByColumn('tbl_posts','post_status','draft');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,29 +126,11 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i><span style="color:red"><?php echo $countPostDraft ? ''.$countPostDraft.'': '0';?></span> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
-                        <li>
-                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                        </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#">View All</a>
+                            <a href="post.php">View All</a>
                         </li>
                     </ul>
                 </li>
@@ -198,26 +186,27 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
                         <a href="category.php" class="<?= ($activePage == 'category') ? 'active':''; ?>"><i class="fa fa-fw fa-wrench"></i> Category</a>
                     </li>
                     <li>
-                        <a href="javascript:;" class="<?= ($activePage == 'post') ? 'active':''; ?>" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Post <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
+                        <a href="post.php" class="<?= ($activePage == 'post') ? 'active':''; ?>"><i class="fa fa-fw fa-file"></i> Post</a>
+                        <!-- <ul id="demo" class="collapse">
                             <li>
                                 <a href="addPosts.php">Add Post</a>
                             </li>
                             <li>
                                 <a href="post.php">View All</a>
                             </li>
-                        </ul>
+                        </ul> -->
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo1" class="<?= ($activePage == 'user') ? 'active':''; ?>"><i class="fa fa-fw fa-arrows-v"></i> User <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo1" class="collapse">
+                    <a href="users.php" class="<?= ($activePage == 'users') ? 'active':''; ?>"><i class="fa fa-fw fa-arrows-v"></i> User</a>
+                        <!-- <a href="users.php" data-toggle="collapse" data-target="#demo1" class="<?= ($activePage == 'user') ? 'active':''; ?>"><i class="fa fa-fw fa-arrows-v"></i> User <i class="fa fa-fw fa-caret-down"></i></a> -->
+                        <!-- <ul id="demo1" class="collapse">
                             <li>
                                 <a href="addUsers.php">Add User</a>
                             </li>
                             <li>
                                 <a href="users.php">View All</a>
                             </li>
-                        </ul>
+                        </ul> -->
                     </li>
                     <!-- <li class="active">
                     

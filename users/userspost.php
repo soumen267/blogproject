@@ -14,9 +14,9 @@ if(isset($_REQUEST['edit'])){
         $post_image = $row['post_image'];
     }
 }
-global $username,$userid;
-if(ISSET($_SESSION['name'])){
-    $username = $_SESSION['name'];
+global $username,$userid,$adm;
+if(ISSET($_SESSION['uname'])){
+    $username = $_SESSION['uname'];
 }
 
 if(isset($_POST['comment'])){
@@ -39,9 +39,17 @@ if(isset($_REQUEST['edit'])){
 //    $id = $_REQUEST['edit'];
 //    $result2 = $obj->canEditComment('tbl_posts',$userid,$id);
 // }
+$adm = 0;
+if(isset($_GET['adm'])){
+    $adm = 1;
+}
+$uid = $obj->loggedinUserId();
+if(isset($_POST['commentid'])){
+    $id = $_REQUEST['edit'];
+    $result2 = $obj->fetchCommentsByPostID('tbl_comments','tbl_posts',$id);
+}
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,6 +69,7 @@ if(isset($_REQUEST['edit'])){
     <!-- Custom CSS -->
     <link href="css/blog-post.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -73,16 +82,22 @@ if(isset($_REQUEST['edit'])){
 <body>
 
     <!-- Navigation -->
+    <?php
+    
+    if(!isset($_GET['adm']) && $adm != 1){?>
     <?php include_once "include/header.php"?>
-
+    <?php } ?>
     <!-- Page Content -->
     <div class="container">
 
         <div class="row">
 
             <!-- Blog Post Content Column -->
-            <div class="col-lg-8">
-
+            <?php if($adm != 1){?>
+                <div class="col-lg-8">
+            <?php }else{?>
+                <div class="col-lg-12">
+            <?php } ?>
                 <!-- Blog Post -->
 
                 <!-- Title -->
@@ -113,8 +128,8 @@ if(isset($_REQUEST['edit'])){
                 <p class="lead"><?php echo $post_content;?></p>
                 
 
+                <?php if($adm != 1 && empty($adm)){?>
                 <hr>
-
                 <!-- Blog Comments -->
 
                 <!-- Comments Form -->
@@ -128,6 +143,7 @@ if(isset($_REQUEST['edit'])){
                         <button type="submit" class="btn btn-primary" name="comment">Submit</button>
                     </form>
                 </div>
+                <?php }?>
                 <hr>
 
                 <!-- Posted Comments -->
@@ -147,12 +163,15 @@ if(isset($_REQUEST['edit'])){
                                 $dd = explode(" ",$text);
                                 echo (date("F j, Y", strtotime($dd[0])) ." at ". date('H:m A', strtotime($dd[1])));
                                 ?>
+                            <?php if($uid == $row['id']){?>
+                                <button data-id="<?php echo $row['id'];?>" class="btn-primary editbtn" type="button">Edit</button>
+                            <?php }?>
                             </small>
                         </h4>
                         <?php echo $row['comment_content'];?>
                     </div>
                 </div>
-                <?php }}else{?>
+                <?php }} else {?>
                 <p>This post has no comments.</p>
                 <?php }?>
                 <!-- Comment -->
@@ -183,6 +202,7 @@ if(isset($_REQUEST['edit'])){
 
             </div>
             <!-- Blog Sidebar Widgets Column -->
+            <?php if($adm != 1 && empty($adm)){?>
             <div class="col-md-4">
 
                 <!-- Blog Search Well -->
@@ -238,7 +258,7 @@ if(isset($_REQUEST['edit'])){
                 </div>
 
             </div>
-
+            <?php }?>
         </div>
         <!-- /.row -->
 
@@ -260,6 +280,12 @@ if(isset($_REQUEST['edit'])){
         $(document).ready(function(){
             $('#summernote').summernote();
         })
+    $(".editbtn").click(function(){
+        var sesval = "<?php echo $username;?>";
+        if(!sesval){
+            alert("Please Login before edit your comment!");
+        }
+    })
     </script>
 
 </body>

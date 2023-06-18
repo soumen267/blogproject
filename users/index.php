@@ -9,7 +9,6 @@ $result = $obj->fetchAllData("tbl_category");
 $posts = $obj->fetchAllData("tbl_posts");
 $username = $obj->loggedinUsername();
 $userrole = $obj->loggedInUserRole('tbl_users',$username);
-
 if(isset($_POST['login'])){
   $uname = $_POST['username'];
   $upwd = $_POST['password'];
@@ -17,10 +16,10 @@ if(isset($_POST['login'])){
   {
     $error = 'Username and password both is required';
   }else{
-    $result = $obj->login('tbl_users', $uname, $upwd);
+    $result = $obj->login('tbl_users', 'users', $uname, $upwd);
     if($result == TRUE){
         session_start();
-        $_SESSION['name'] = $uname;
+        $_SESSION['uname'] = $uname;
         header("Location: http://localhost/blogproject/users/");
         exit;
     }else{
@@ -66,36 +65,7 @@ if(isset($_POST['logout'])){
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+    <?php include "include/header.php"?>
 
     <!-- Page Content -->
     <div class="container">
@@ -197,7 +167,7 @@ if(isset($_POST['logout'])){
                 </div>
 
                 <!-- Login -->
-                <?php if(isset($_SESSION['name']) && !$userrole){?>
+                <?php if(isset($_SESSION['uname'])){?>
                 <div class="well">
                     <form action="" method="post">
                     <button class="btn btn-primary" type="submit" name="logout">Logout</button>
@@ -222,6 +192,8 @@ if(isset($_POST['logout'])){
                     <button class="btn btn-primary" type="submit" name="login">Submit</button>
                     </form>
                     <!-- /.input-group -->
+                    <br/>
+                    <a href="forgot.php" class="href">Forgot Password</a>
                 </div>
                 <?php } ?>
                 <!-- Blog Categories Well -->

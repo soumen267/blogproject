@@ -1,14 +1,15 @@
 <?php
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
- 
 require_once "../maincontroller.php";
 session_start(); 
 $obj = new maincontroller();
 global $errors;
 
-$name = $_SESSION['name'];
-$result = $obj->fetchAllPosts('tbl_posts', 'tbl_category', 'tbl_users', $name);
+
+$name = $obj->loggedinUsername();
+if($name){
+    $result = $obj->fetchAllPosts('tbl_posts', 'tbl_category', 'tbl_users', $name);
+}
+
 
 if(ISSET($_POST['id'])){
     $id = $_POST['id'];
@@ -72,6 +73,7 @@ if(ISSET($_POST['id'])){
                         <?php } ?>
                         <h1 class="page-header">
                             Posts
+                            <small><a href="addPosts.php">Add</a></small>
                         </h1>
                         <ol class="breadcrumb">
                             <li>
@@ -101,10 +103,10 @@ if(ISSET($_POST['id'])){
                                     <th>Post Image</th>
                                     <th>Post Content</th>
                                     <th>Post Tag</th>
-                                    <th>Post Comment Count</th>
-                                    <th>Post Status</th>
-                                    <th>Post View Count</th>
-                                    <th colspan="2">Action</th>
+                                    <th>Comment Count</th>
+                                    <th>Status</th>
+                                    <th>View Count</th>
+                                    <th colspan="3">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -113,7 +115,7 @@ if(ISSET($_POST['id'])){
                                 // print_r($row);
                                 // die();
                                 ?>
-                                <tr id="row<?php echo $row['id'];?>">
+                                <tr id="row<?php echo $row['id'];?>" data-id="<?php echo $row['id'];?>">
                                     <td><?php echo $row['id'];?></td>
                                     <td><?php echo $row['cat_name'];?></td>
                                     <td><?php echo $row['post_title'];?></td>
@@ -125,11 +127,15 @@ if(ISSET($_POST['id'])){
                                     </td>
                                     <td><?php echo htmlentities(substr($row['post_content'],0,10));?></td>
                                     <td><?php echo $row['post_tag'];?></td>
-                                    <td><?php echo $row['post_comment_count'];?></td>
-                                    <td><?php echo $row['post_status'];?></td>
-                                    <td><?php echo $row['post_view_count'];?></td>
+                                    <td><?php
+                                    $commentcount = $obj->countDataById('tbl_comments', 'post_id', $row['id']);
+                                    echo $commentcount ? ''.$commentcount.'' : '0';?></td>
                                     <td>
-                                    <a href="postEdit.php?edit=<?php echo $row['id'];?>"><i class="fa fa-edit" aria-hidden="true" title="edit"></i></a></td>
+                                    <a href="javascript:void(0);" class="mybtn" data-value="<?php echo ucfirst($row['post_status']);?>" style="color:blue"><?php echo ucfirst($row['post_status']);?></a>
+                                    </td>
+                                    <td><?php echo $row['post_view_count'];?></td>
+                                    <td><a href="../users/userspost.php?edit=<?php echo $row['id'];?>&adm" target="__blank"><i class="fa fa-eye" aria-hidden="true" title="view"></i></a></td>
+                                    <td><a href="postEdit.php?edit=<?php echo $row['id'];?>"><i class="fa fa-edit" aria-hidden="true" title="edit"></i></a></td>
                                     <td>
                                     <a href="javascript:void(0)" data-id="<?php echo $row['id'];?>" class="btndelete"><i class="fa fa-trash" aria-hidden="true" title="delete"></i></a></td>
                                     <!-- <form action="" method="post">
@@ -195,12 +201,29 @@ if(ISSET($_POST['id'])){
         });
 </script>
 <script>
-// $("document").ready(function(){
-//     setTimeout(function(){
-//        $("div.alert").remove();
-//     }, 5000 ); // 5 secs
-
-// });
+        $(".mybtn").click(function(){
+            var value = $(this).text();
+            var id = $(this).parents("tr").attr("data-id");
+            console.log(id);
+            var txt;
+            if(value == "Draft"){
+                $(this).attr("data-value", "Published");
+                txt = $(this).attr("data-value");
+                $(this).text(txt)
+            }else if((value == "Published")){
+                $(this).attr("data-value", "Draft");
+                txt = $(this).attr("data-value");
+                $(this).text(txt)
+            }
+            $.ajax({
+                url: "postUpdate.php/",
+                type: "POST",
+                data: {"txt":txt, "id":id},
+                success: function(data){
+                    console.log(data);
+                }
+            })
+        })
 </script>
 </body>
 </html>

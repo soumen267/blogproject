@@ -13,7 +13,7 @@ if(ISSET($_POST['submit'])){
         $error = 'Username and Password is required.';
     }else{
         
-        $auth = $obj->login('tbl_users', $username, $password);
+        $auth = $obj->login('tbl_users','admin',$username, $password);
         if(!$auth){
             $error = 'Invalid username or password';
             header('location:http://localhost/blogproject/admin/');

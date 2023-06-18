@@ -2,11 +2,15 @@
 require_once "../database.php";
 class maincontroller extends database{
 
-    public function login($table_name,$uname,$upwd){
+    public function login($table_name,$type,$uname,$upwd){
         $res = "SELECT * FROM $table_name WHERE `username` = '$uname' AND `password` = '$upwd'";
         $res = mysqli_query($this->conn, $res);
         if(mysqli_num_rows($res) > 0){
-            $_SESSION['name']=$uname;
+            if($type=="users"){
+                $_SESSION['uname']=$uname;
+            }elseif($type=="admin"){
+                $_SESSION['name']=$uname;
+            }
             return true;
         }else{
             return false;
@@ -181,7 +185,8 @@ class maincontroller extends database{
         }
     }
     public function logout(){
-        $sql = "SELECT `user_role` FROM `tbl_users` WHERE `username` = 'loggedinUsername()'";
+        $users = $this->loggedinUsername();
+        $sql = "SELECT `user_role` FROM `tbl_users` WHERE `username` = '$users'";
         $res = $this->conn->query($sql);
         if(mysqli_num_rows($res) > 0){
             foreach($res as $val){
@@ -210,18 +215,23 @@ class maincontroller extends database{
     function loggedinUsername(){
         if(isset($_SESSION['name'])){
             return $_SESSION['name'];
-        }
-        return false;
+        }elseif(isset($_SESSION['uname'])){
+            return $_SESSION['uname'];
+        }else{
+            return false;
+        }        
     }
 
     function loggedinUserId(){
-        $sql = "SELECT `user_id` FROM `tbl_users` WHERE `username`='loggedinUsername()'";
+        $uname = $this->loggedinUsername();
+        $sql = "SELECT `user_id` FROM `tbl_users` WHERE `username` = '$uname'";
         $res = $this->conn->query($sql);
         if(mysqli_num_rows($res) > 0){
             foreach($res as $val){
                 $user_id = implode(",",$val);
                 return $user_id;
             }
+            return false;
         }
     }
     function loggedInUserRole($foreign_table_name1, $name){
@@ -280,6 +290,35 @@ class maincontroller extends database{
             return $count;
         }else{
             return false;
+        }
+    }
+
+    function countDataByColumn($tablename, $columnname,$columvalue){
+        $sql = "SELECT * FROM $tablename WHERE $columnname = '$columvalue'";
+        $res = $this->conn->query($sql);
+        $count = mysqli_num_rows($res);
+        if($count > 0){
+            return $count;
+        }else{
+            return false;
+        }
+    }
+
+    function countDataById($tablename, $columnname, $id){
+        $sql = "SELECT * FROM $tablename WHERE $columnname = $id";
+        $res = $this->conn->query($sql);
+        $count = mysqli_num_rows($res);
+        if($count > 0){
+            return $count;
+        }else{
+            return false;
+        }
+    }
+
+    function redirectIfNotLogin(){
+        if(!isset($_SESSION['name'])){
+            header("Location: http://localhost/blogproject/admin/");
+            exit();
         }
     }
 

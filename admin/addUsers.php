@@ -128,14 +128,13 @@ if (isset($_POST['submit'])) {
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Add Users
-                            <small>Subheading</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i> <a href="dashboard.php">Dashboard</a>
                             </li>
                             <li class="">
-                                <i class="fa fa-file"></i> Blank Page
+                                <i class="fa fa-file"></i> <a href="users.php">Users</a>
                             </li>
                         </ol>
                     </div>

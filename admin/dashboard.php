@@ -2,6 +2,7 @@
 session_start();
 include_once "../maincontroller.php";
 
+
 $obj = new maincontroller();
 
 $countPosts = $obj->countData('tbl_posts');

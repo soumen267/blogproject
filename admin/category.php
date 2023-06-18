@@ -1,6 +1,6 @@
 <?php
 require_once "../maincontroller.php";
-
+session_start();
 $obj = new maincontroller();
 global $errors;
 if(ISSET($_POST['cat_name'])){

@@ -96,7 +96,7 @@ if(isset($_POST['id'])){
                         <?php } ?>
                         <h1 class="page-header">
                             Users
-                            <small>Subheading</small>
+                            <small><a href="addUsers.php">Add</a></small>
                         </h1>
                         <ol class="breadcrumb">
                             <li>

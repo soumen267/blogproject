@@ -55,7 +55,7 @@ if (isset($_POST['post'])) {
     }
     }    
 }
-$result = $obj->fetchAllUsers('tbl_category');
+$result = $obj->fetchAllData('tbl_category');
 
 ?>
 
@@ -94,14 +94,14 @@ $result = $obj->fetchAllUsers('tbl_category');
                             </div>
                         <?php } ?>
                         <h1 class="page-header">
-                            Posts
+                           Add Posts
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i> <a href="dashboard.php">Dashboard</a>
                             </li>
                             <li class="">
-                                <i class="fa fa-file"></i> Blank Page
+                                <i class="fa fa-file"></i> <a href="post.php">Post</a>
                             </li>
                         </ol>
                     </div>
@@ -146,7 +146,6 @@ $result = $obj->fetchAllUsers('tbl_category');
                                 <textarea name="post_content" id="summernote" class="form-control" rows="3" placeholder="Post Content"></textarea>
                                 <?php echo $contenterrors ;?>
                             </div>
-                            <br />
                             <button type="submit" name="post" class="btn btn-primary">Submit</button>
                         </form>
 
