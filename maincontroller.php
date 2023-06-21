@@ -1,5 +1,5 @@
 <?php
-require_once "../database.php";
+require_once "database.php";
 class maincontroller extends database{
 
     public function login($table_name,$type,$uname,$upwd){
@@ -163,6 +163,20 @@ class maincontroller extends database{
     public function updateData($table_name, $data, $column,$id){
         foreach ($data as $keys => $value){
             $studentEditData = "UPDATE $table_name SET $keys = '$value' WHERE $column = $id";
+            $res = $this->conn->query($studentEditData);
+        }
+        if($res == TRUE){
+            return $res;
+        }else{
+            return false;
+            echo "Error updating record: " . $this->conn->error;
+
+        }
+    }
+
+    public function updatedData($table_name, $data, $column,$id){
+        foreach ($data as $keys => $value){
+            $studentEditData = "UPDATE $table_name SET $keys = '$value' WHERE $column = '$id'";
             $res = $this->conn->query($studentEditData);
         }
         if($res == TRUE){

@@ -1,5 +1,5 @@
 <?php
-include "../config.php";
+include "config.php";
 class database{
     private $hostname = DB_HOSTNAME;
     private $dbName = DB_NAME;

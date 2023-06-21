@@ -193,7 +193,7 @@ if(isset($_POST['logout'])){
                     </form>
                     <!-- /.input-group -->
                     <br/>
-                    <a href="forgot.php" class="href">Forgot Password</a>
+                    <a href="../forgotpassword.php" class="href">Forgot Password</a>
                 </div>
                 <?php } ?>
                 <!-- Blog Categories Well -->

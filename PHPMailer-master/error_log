@@ -1,0 +1,167 @@
+[01-Jan-2021 06:08:41 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 06:08:41 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 06:08:41 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:08:41 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:08:42 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 06:08:42 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 06:08:42 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:08:42 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:08:43 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 06:08:43 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 06:08:43 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:08:43 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:09:47 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 06:09:47 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 06:09:47 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:09:47 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:09:48 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 06:09:48 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 06:09:48 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:09:48 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:09:56 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 06:09:56 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 06:09:56 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:09:56 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:09:56 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trysmartedgeacce/public_html/Api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[01-Jan-2021 06:09:56 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trysmartedgeacce/public_html/Api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[01-Jan-2021 06:09:56 UTC] PHP Fatal error:  require(): Failed opening required 'vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/trysmartedgeacce/public_html/Api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[01-Jan-2021 06:10:02 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 06:10:02 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 06:10:02 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:10:02 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:10:02 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 06:10:02 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 06:10:02 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:10:02 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:10:02 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trysmartedgeacce/public_html/Api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[01-Jan-2021 06:10:02 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trysmartedgeacce/public_html/Api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[01-Jan-2021 06:10:02 UTC] PHP Fatal error:  require(): Failed opening required 'vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/trysmartedgeacce/public_html/Api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[01-Jan-2021 06:10:05 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 06:10:05 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 06:10:05 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:10:05 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:10:05 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 06:10:05 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 06:10:05 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:10:05 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:10:05 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trysmartedgeacce/public_html/Api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[01-Jan-2021 06:10:05 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trysmartedgeacce/public_html/Api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[01-Jan-2021 06:10:05 UTC] PHP Fatal error:  require(): Failed opening required 'vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/trysmartedgeacce/public_html/Api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[01-Jan-2021 06:10:07 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 06:10:07 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 06:10:07 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 06:10:07 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 14:11:35 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 14:11:36 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[01-Jan-2021 14:11:36 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[01-Jan-2021 14:11:36 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Jan-2021 14:11:36 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[04-Feb-2021 13:59:05 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[04-Feb-2021 13:59:05 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[04-Feb-2021 13:59:05 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[04-Feb-2021 13:59:05 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 06:57:43 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[03-Sep-2021 06:57:43 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[03-Sep-2021 06:57:43 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 06:57:43 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 06:57:43 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[03-Sep-2021 06:57:43 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[03-Sep-2021 06:57:43 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 06:57:43 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 06:57:43 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[03-Sep-2021 06:57:43 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[03-Sep-2021 06:57:43 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 06:57:43 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 06:57:44 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[03-Sep-2021 06:57:44 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[03-Sep-2021 06:57:44 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 06:57:44 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 06:57:44 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[03-Sep-2021 06:57:44 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[03-Sep-2021 06:57:44 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 06:57:44 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:16 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:16 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:16 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:16 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:21 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:21 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:21 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:21 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:21 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[03-Sep-2021 07:10:21 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[03-Sep-2021 07:10:21 UTC] PHP Fatal error:  require(): Failed opening required 'vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[03-Sep-2021 07:10:22 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:22 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:22 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:22 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:26 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:26 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:26 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:26 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:27 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:27 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:27 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:27 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:27 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[03-Sep-2021 07:10:27 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[03-Sep-2021 07:10:27 UTC] PHP Fatal error:  require(): Failed opening required 'vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[03-Sep-2021 07:10:28 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:28 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:28 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:28 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:29 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:29 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:29 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:29 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:29 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[03-Sep-2021 07:10:29 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[03-Sep-2021 07:10:29 UTC] PHP Fatal error:  require(): Failed opening required 'vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[03-Sep-2021 07:10:31 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:31 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[03-Sep-2021 07:10:31 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Sep-2021 07:10:31 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[10-Sep-2021 03:18:23 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[10-Sep-2021 03:18:23 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[10-Sep-2021 03:18:23 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[10-Sep-2021 03:18:23 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[10-Sep-2021 03:34:37 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[10-Sep-2021 03:34:37 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[10-Sep-2021 03:34:37 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[10-Sep-2021 03:34:37 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[10-Sep-2021 03:34:37 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[10-Sep-2021 03:34:37 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[10-Sep-2021 03:34:37 UTC] PHP Fatal error:  require(): Failed opening required 'vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[10-Sep-2021 20:38:13 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[10-Sep-2021 20:38:13 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[10-Sep-2021 20:38:13 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[10-Sep-2021 20:38:13 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[11-Sep-2021 04:21:08 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[11-Sep-2021 04:21:08 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[11-Sep-2021 04:21:08 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[11-Sep-2021 04:21:08 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[11-Sep-2021 04:21:08 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[11-Sep-2021 04:21:08 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[11-Sep-2021 04:21:08 UTC] PHP Fatal error:  require(): Failed opening required 'vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[11-Sep-2021 10:43:38 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[11-Sep-2021 10:43:38 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[11-Sep-2021 10:43:38 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[11-Sep-2021 10:43:38 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[11-Sep-2021 10:43:38 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[11-Sep-2021 10:43:38 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
+[11-Sep-2021 10:43:38 UTC] PHP Fatal error:  require(): Failed opening required 'vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/trytotalfitmodel/absoluteusertrend.com/api/VitaBot/PHPMailer-master/get_oauth_token.php on line 59
