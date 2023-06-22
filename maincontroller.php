@@ -147,6 +147,17 @@ class maincontroller extends database{
         
     }
     
+    public function fetchAllPostData($table_name){
+        $sql = "SELECT * FROM $table_name WHERE `deleted_at` IS NULL AND `post_status` = 'Published'";
+        $res = $this->conn->query($sql);
+        if($res->num_rows > 0){
+            return $res;
+        }else{
+            return false;
+        }
+        
+    }
+
     public function fetchDataByID($table_name, $column_name, $id){
         $sql = "SELECT * FROM $table_name WHERE $column_name = $id";
         $res = $this->conn->query($sql);
@@ -334,6 +345,18 @@ class maincontroller extends database{
             header("Location: http://localhost/blogproject/admin/");
             exit();
         }
+    }
+
+    function customQuery($tablename, $column = NULL){
+        $sql = "SELECT $column FROM $tablename";
+        $res = $this->conn->query($sql);
+        if(mysqli_num_rows($res) > 0){
+            foreach($res as $val){
+                $col = implode(",",$val);
+                return $col;
+            }
+        }
+        return false;
     }
 
 }

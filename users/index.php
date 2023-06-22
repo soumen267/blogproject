@@ -4,9 +4,10 @@ require_once "../maincontroller.php";
 
 $obj = new maincontroller();
 
-$result = $obj->fetchAllData("tbl_category");
+$check = $obj->customQuery('tbl_posts','post_status');
 
-$posts = $obj->fetchAllData("tbl_posts");
+$result = $obj->fetchAllData("tbl_category");
+$posts = $obj->fetchAllPostData("tbl_posts");
 $username = $obj->loggedinUsername();
 $userrole = $obj->loggedInUserRole('tbl_users',$username);
 if(isset($_POST['login'])){

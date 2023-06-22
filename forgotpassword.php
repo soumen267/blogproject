@@ -13,7 +13,7 @@
 	require 'PHPMailer-master/src/SMTP.php'; 
 include_once "maincontroller.php";
 $obj = new maincontroller();
-
+global $emailerr;
 if(isset($_POST['recover-submit'])){
 $email = $obj->emailExists($_POST['email']);
 $emails = $_POST['email'];
@@ -73,7 +73,7 @@ if($email){
 
             }
   }else{
-    echo "Email does not exists";
+    $emailerr = "Email does not exists";
   }
 
 
@@ -104,6 +104,7 @@ if($email){
 
 
                                 <h3><i class="fa fa-lock fa-4x"></i></h3>
+                                <h4 style="color:red"><?php echo $emailerr; ?></h4>
                                 <h2 class="text-center">Forgot Password?</h2>
                                 <p>You can reset your password here.</p>
                                 <div class="panel-body">

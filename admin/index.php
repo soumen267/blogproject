@@ -5,14 +5,13 @@ include "../maincontroller.php";
 $obj = new maincontroller();
 global $error;
 if(ISSET($_POST['submit'])){
-        
-        $username = mysqli_real_escape_string($obj->conn, $_POST['username']);
-        $password = mysqli_real_escape_string($obj->conn, $_POST['password']);
+    $username = mysqli_real_escape_string($obj->conn, $_POST['username']);
+    $password = mysqli_real_escape_string($obj->conn, $_POST['password']);
+    $remember = mysqli_real_escape_string($obj->conn, $_POST['remember']);
 
     if($username == '' || $password == ''){
         $error = 'Username and Password is required.';
     }else{
-        
         $auth = $obj->login('tbl_users','admin',$username, $password);
         if(!$auth){
             $error = 'Invalid username or password';
@@ -25,6 +24,16 @@ if(ISSET($_POST['submit'])){
                 }elseif($auth1){
                     session_start();
                     $_SESSION['name'] = $username;
+                    if(isset($remember))
+                    {
+                        echo "Yes";
+                        $hour = time() + 3600 * 24 * 30;
+                        setcookie("username",$_POST['username'],$hour);
+                        setcookie("password",$_POST['password'],$hour);
+                    }else{
+                        setcookie("username",'');
+                        setcookie("password",'');
+                    }
                     header('location:dashboard.php');
                 }
         }
@@ -59,14 +68,15 @@ if(ISSET($_POST['submit'])){
                             <p class="error text-danger"><?php echo $error; ?></p>
                             <div class="form-group">
                                 <label for="username" class="text-info">Username:</label><br>
-                                <input type="text" name="username" id="username" class="form-control">
+                                <input type="text" name="username" id="username" value="<?php if(isset($_COOKIE["username"])) { echo $_COOKIE["username"]; } ?>" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-info">Password:</label><br>
-                                <input type="password" name="password" id="password" class="form-control">
+                                <input type="password" name="password" id="password" value="<?php if(isset($_COOKIE["password"])) { echo $_COOKIE["password"]; } ?>" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                <label for="remember-me" class="text-info"><span>Remember me</span> <span>
+                                <input id="remember" name="remember" type="checkbox" <?php if(isset($_COOKIE["username"])) { ?> checked <?php } ?>></span></label><br>
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="Submit">
                             </div>
                             <div id="register-link" class="text-right">
