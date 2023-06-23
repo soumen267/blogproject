@@ -1,28 +1,22 @@
 <?php
+session_start();
 include_once "maincontroller.php";
 $obj = new maincontroller();
-    if(!isset($_GET['email']) && !isset($_GET['token'])){
+    if(!isset($_SESSION['email'])){
         header("Location: http://localhost/blogproject/users/");
     }
-
-
-
-//    if($_GET['token'] !== $token || $_GET['email'] !== $email){
-//
-//        redirect('index');
-//
-//    }
 if(isset($_POST['resetPassword']))
 {
     if(isset($_POST['password']) && isset($_POST['confirmPassword'])){
         if($_POST['password'] === $_POST['confirmPassword']){
             $password = $_POST['password'];
-            $email = $_GET['email'];
+            $email = $_SESSION['email'];
             $inputData = array(
                 'password' => mysqli_real_escape_string($obj->conn, $_POST['password'])
             );
             //$hashedPassword = password_hash($password, PASSWORD_BCRYPT, array('cost'=>12));
             $obj->updatedData('tbl_users', $inputData, 'user_email', $email);
+            unset($email);
             header("Location: http://localhost/blogproject/users/");
         }
 
@@ -82,8 +76,6 @@ if(isset($_POST['resetPassword']))
                                     <div class="form-group">
                                         <input name="resetPassword" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
                                     </div>
-
-                                    <input type="hidden" class="hide" name="token" id="token" value="">
                                 </form>
 
                             </div><!-- Body-->
@@ -97,9 +89,6 @@ if(isset($_POST['resetPassword']))
 
 
 <hr>
-
-<?php include "./users/include/footer.php"; ?>
-
 </div> <!-- /.container -->
 </body>
 </html>

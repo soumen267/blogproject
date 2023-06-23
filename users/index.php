@@ -21,8 +21,7 @@ if(isset($_POST['login'])){
     if($result == TRUE){
         session_start();
         $_SESSION['uname'] = $uname;
-        header("Location: http://localhost/blogproject/users/");
-        exit;
+        header("Location: http://localhost/blogproject/admin/dashboard.php");
     }else{
         $error = 'Invalid username or password';
     	header("Location: ");

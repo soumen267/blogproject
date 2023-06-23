@@ -1,4 +1,5 @@
 <?php 
+session_start();
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
@@ -18,9 +19,11 @@ if(isset($_POST['recover-submit'])){
 $email = $obj->emailExists($_POST['email']);
 $emails = $_POST['email'];
 if($email){
-            $length = 50;
-            $token = bin2hex(openssl_random_pseudo_bytes($length));
-
+            //$length = 50;
+            //$token = bin2hex(openssl_random_pseudo_bytes($length));
+         $otp = rand(100000, 999999); //generates random otp
+         $_SESSION['session_otp'] = $otp;
+         $_SESSION['email'] = $emails;
    	     $mail = new PHPMailer();
 
           $mail->isSMTP();                                      // Set mailer to use SMTP
@@ -45,23 +48,25 @@ if($email){
 
           $mail->isHTML(true);  
   //         $email_template = './mail/index.html';
-             $mail->Body = '<p>Please click to reset your password
+          // $mail->Body = '<p>Please click to reset your password
 
-              <a href="http://localhost/blogproject/reset.php?email='.$emails.'&token='.$token.' ">http://localhost/blogproject/reset.php?email='.$emails.'&token='.$token.'</a>
+          //     <a href="http://localhost/blogproject/reset.php?email='.$emails.'&token='.$token.' ">http://localhost/blogproject/reset.php?email='.$emails.'&token='.$token.'</a>
 
-            </p>'; 
-
+          //   </p>'; 
+         $mail->Body = '<p>Your one time email verification code is '.$otp.'
+         </p>'; 
           //$message = file_get_contents($email_template);
+          $message = "Your one time email verification code is" . $otp;
 
           //$mail->MsgHTML($message);  
 
-          $mail->Subject = 'Thanks';
+          $mail->Subject = 'Email verification from MyBlog';
 
           if (!$mail->send())
 
           {
 
-            echo 'Mailer Error: ' . $mail->ErrorInfo;
+            $emailerr = 'Mailer Error: ' . $mail->ErrorInfo;
 
           }
 
@@ -69,7 +74,7 @@ if($email){
 
             {
 
-             echo "mail send 📨";
+              $emailerr = "mail send 📨";
 
             }
   }else{
@@ -78,6 +83,16 @@ if($email){
 
 
 }
+if(isset($_POST["otp-submit"])){
+  if($_POST["otp"] == $_SESSION['session_otp']){
+    unset($_SESSION['session_otp']);
+    $emailerr = "Success!";
+    header("Location: http://localhost/blogproject/reset.php?ver");
+  }else{
+    $emailerr = "Invalid OTP please try again!";
+  }
+}
+
 ?>
 <!-- Page Content -->
 <!DOCTYPE html>
@@ -100,7 +115,8 @@ if($email){
             <div class="col-md-4 col-md-offset-4">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="text-center">
+                       <?php if(!isset($_SESSION['session_otp'])){?>
+                         <div class="text-center">
 
 
                                 <h3><i class="fa fa-lock fa-4x"></i></h3>
@@ -130,6 +146,24 @@ if($email){
                                 </div><!-- Body-->
 
                         </div>
+                        <?php }else{?>
+                          <h3><i class="fa fa-lock fa-4x"></i></h3>
+                          <h4 style="color:red" class="text-center"><?php echo $emailerr; ?></h4>
+                          <h2 class="text-center"></h2>
+                          <p>Please enter your OTP here.</p>
+                          <form id="register-form" role="form" autocomplete="off" class="form" method="post">
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+                                    <input id="otp" name="otp" placeholder="Enter you OTP" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input name="otp-submit" class="btn btn-lg btn-primary btn-block" value="Verify" type="submit">
+                            </div>
+                            </form>
+                        <?php }?>
                     </div>
                 </div>
             </div>

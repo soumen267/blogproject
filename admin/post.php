@@ -102,7 +102,7 @@ if(ISSET($_POST['id'])){
                                     <th>Post Date</th>
                                     <th>Post Image</th>
                                     <th>Post Content</th>
-                                    <th>Post Tag</th>
+                                    <th>Tag</th>
                                     <th>Comment Count</th>
                                     <th>Status</th>
                                     <th>View Count</th>
@@ -111,13 +111,14 @@ if(ISSET($_POST['id'])){
                             </thead>
                             <tbody>
                                 <?php
+                                if($result){
                                 foreach ($result as $row){
                                 // print_r($row);
                                 // die();
                                 ?>
                                 <tr id="row<?php echo $row['id'];?>" data-id="<?php echo $row['id'];?>">
                                     <td><?php echo $row['id'];?></td>
-                                    <td><?php echo $row['cat_name'];?></td>
+                                    <td class="btn btn-warning"><?php echo $row['cat_name'];?></td>
                                     <td><?php echo $row['post_title'];?></td>
                                     <td><?php echo $row['post_author'];?></td>
                                     <td><?php echo $row['username'];?></td>
@@ -126,12 +127,17 @@ if(ISSET($_POST['id'])){
                                     <img src="./images/posts/<?php echo $row['post_image'];?>" class="img-responsive" style="height:42px;width:71px;" alt="Image">
                                     </td>
                                     <td><?php echo htmlentities(substr($row['post_content'],0,10));?></td>
-                                    <td><?php echo $row['post_tag'];?></td>
                                     <td><?php
-                                    $commentcount = $obj->countDataById('tbl_comments', 'post_id', $row['id']);
+                                    $myarray = explode(",",$row['post_tag']);
+                                    foreach($myarray as $val){
+                                        echo "<span class='badge badge-primary'>".strtoupper($val)."</span> ";
+                                    }
+                                    
+                                    ?></span></td>
+                                    <td><?php $commentcount = $obj->countDataById('tbl_comments', 'post_id', $row['id']);
                                     echo $commentcount ? ''.$commentcount.'' : '0';?></td>
                                     <td>
-                                    <a href="javascript:void(0);" class="mybtn" data-value="<?php echo ucfirst($row['post_status']);?>" style="color:blue"><?php echo ucfirst($row['post_status']);?></a>
+                                    <a href="javascript:void(0);" class="mybtn btn btn-success rounded-pill" style="color:white" data-value="<?php echo ucfirst($row['post_status']);?>" style="color:blue"><?php echo ucfirst($row['post_status']);?></a>
                                     </td>
                                     <td><?php echo $row['post_view_count'];?></td>
                                     <td><a href="../users/userspost.php?edit=<?php echo $row['id'];?>&adm" target="__blank"><i class="fa fa-eye" aria-hidden="true" title="view"></i></a></td>
@@ -144,7 +150,11 @@ if(ISSET($_POST['id'])){
                                     </form> -->
                                     </td>
                                 </tr>
-                                <?php }?>
+                                <?php } } else{?>
+                                    </tr>
+                                    <td colspan="13">No post found</td>
+                                    <tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>

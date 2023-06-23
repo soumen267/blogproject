@@ -4,7 +4,7 @@ include_once "../maincontroller.php";
 
 $obj = new maincontroller();
 
-$obj->redirectIfNotLogin();
+//$obj->redirectIfNotLogin();
 
 if(ISSET($_POST['logout'])){
     $log = $obj->logout();

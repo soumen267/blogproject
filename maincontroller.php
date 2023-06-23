@@ -6,11 +6,11 @@ class maincontroller extends database{
         $res = "SELECT * FROM $table_name WHERE `username` = '$uname' AND `password` = '$upwd'";
         $res = mysqli_query($this->conn, $res);
         if(mysqli_num_rows($res) > 0){
-            if($type=="users"){
-                $_SESSION['uname']=$uname;
-            }elseif($type=="admin"){
-                $_SESSION['name']=$uname;
-            }
+            // if($type=="users"){
+            //     $_SESSION['uname']=$uname;
+            // }elseif($type=="admin"){
+            //     $_SESSION['name']=$uname;
+            // }
             return true;
         }else{
             return false;
@@ -340,12 +340,12 @@ class maincontroller extends database{
         }
     }
 
-    function redirectIfNotLogin(){
-        if(!isset($_SESSION['name'])){
-            header("Location: http://localhost/blogproject/admin/");
-            exit();
-        }
-    }
+    // function redirectIfNotLogin(){
+    //     if(!isset($_SESSION['name'])){
+    //         header("Location: http://localhost/blogproject/admin/");
+    //         exit();
+    //     }
+    // }
 
     function customQuery($tablename, $column = NULL){
         $sql = "SELECT $column FROM $tablename";
