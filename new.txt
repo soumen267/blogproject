@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS `tbl_like`(
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+    `user_id` int(11) NOT NULL,
+    `post_id` int(11) NOT NULL,
+    PRIMARY KEY (`id`)
+)
+
+User
+john12345
+John@7894561423
+
+Admin
+somu12345
+Soumen@123456677
