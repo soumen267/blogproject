@@ -115,14 +115,13 @@ if(isset($_FILES['post_image']['name']) == true && $_FILES['post_image']['name']
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Posts
-                            <small>Subheading</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="dashboard.php">Dashboard</a>
                             </li>
                             <li class="">
-                                <i class="fa fa-file"></i> Blank Page
+                                <i class="fa fa-file"></i> <a href="post.php">Posts</a>
                             </li>
                         </ol>
                     </div>

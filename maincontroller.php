@@ -209,6 +209,17 @@ class maincontroller extends database{
             return false;
         }
     }
+
+    public function deletedataWithoutDeleteColumn($table_name, $post_id, $user_id){
+        $dataDelete = "DELETE FROM $table_name WHERE `post_id` = '$post_id' AND `user_id` = $user_id";
+        $res = $this->conn->query($dataDelete);
+        if($res){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function logout(){
         $users = $this->loggedinUsername();
         $sql = "SELECT `user_role` FROM `tbl_users` WHERE `username` = '$users'";
@@ -235,6 +246,13 @@ class maincontroller extends database{
         }else{
             return false;
         }
+    }
+
+    function isLoggedIn(){
+        if(isset($_SESSION['name']) || isset($_SESSION['uname'])){
+            return true;
+        }
+        return false;
     }
 
     function loggedinUsername(){
@@ -346,6 +364,17 @@ class maincontroller extends database{
     //         exit();
     //     }
     // }
+
+    function userUnlike($id, $userid){
+        $sql = "SELECT * FROM `tbl_like` WHERE `user_id` = $userid AND `post_id` = $id";
+        $res = $this->conn->query($sql);
+        $count = mysqli_num_rows($res);
+        if($count > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     function customQuery($tablename, $column = NULL){
         $sql = "SELECT $column FROM $tablename";

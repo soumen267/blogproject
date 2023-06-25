@@ -1,6 +1,6 @@
 <?php
 include_once "../maincontroller.php";
-
+include_once "../config.php";
 
 $obj = new maincontroller();
 
@@ -24,7 +24,9 @@ $countPostDraft = $obj->countDataByColumn('tbl_posts','post_status','draft');
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title><?php
+    $title = SITETITLE;
+    echo $title ;?></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -36,6 +38,7 @@ $countPostDraft = $obj->countDataByColumn('tbl_posts','post_status','draft');
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -52,6 +55,15 @@ $countPostDraft = $obj->countDataByColumn('tbl_posts','post_status','draft');
         background-color: black;
         color: whitesmoke!important;
         }
+        .fa-5xx{
+            font-size: 1.2em;
+        }
+        /* .navbar{
+            background-color: blue;
+        }
+        .nav{
+            background-color: pink;
+        } */
     </style>
 </head>
 <body>
@@ -141,6 +153,8 @@ $countPostDraft = $obj->countDataByColumn('tbl_posts','post_status','draft');
                     if(isset($_SESSION['name']))
                     {
                       echo ucfirst($_SESSION['name']);
+                    }elseif(isset($_SESSION['uname'])){
+                      echo ucfirst($_SESSION['uname']);
                     }
                         
                     ?>
@@ -183,10 +197,10 @@ $countPostDraft = $obj->countDataByColumn('tbl_posts','post_status','draft');
                         <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
                     </li> -->
                     <li>
-                        <a href="category.php" class="<?= ($activePage == 'category') ? 'active':''; ?>"><i class="fa fa-fw fa-wrench"></i> Category</a>
+                        <a href="category.php" class="<?= ($activePage == 'category') ? 'active':''; ?>"><i class="fa fa-list fa-5xx"></i> Category</a>
                     </li>
                     <li>
-                        <a href="post.php" class="<?= ($activePage == 'post') ? 'active':''; ?>"><i class="fa fa-fw fa-file"></i> Post</a>
+                        <a href="post.php" class="<?= ($activePage == 'post') ? 'active':''; ?>"><i class="fa fa-file-text fa-5xx"></i> Post</a>
                         <!-- <ul id="demo" class="collapse">
                             <li>
                                 <a href="addPosts.php">Add Post</a>
@@ -197,7 +211,7 @@ $countPostDraft = $obj->countDataByColumn('tbl_posts','post_status','draft');
                         </ul> -->
                     </li>
                     <li>
-                    <a href="users.php" class="<?= ($activePage == 'users') ? 'active':''; ?>"><i class="fa fa-fw fa-arrows-v"></i> User</a>
+                    <a href="users.php" class="<?= ($activePage == 'users') ? 'active':''; ?>"><i class="fa fa-user fa-5xx"></i> User</a>
                         <!-- <a href="users.php" data-toggle="collapse" data-target="#demo1" class="<?= ($activePage == 'user') ? 'active':''; ?>"><i class="fa fa-fw fa-arrows-v"></i> User <i class="fa fa-fw fa-caret-down"></i></a> -->
                         <!-- <ul id="demo1" class="collapse">
                             <li>
@@ -208,11 +222,10 @@ $countPostDraft = $obj->countDataByColumn('tbl_posts','post_status','draft');
                             </li>
                         </ul> -->
                     </li>
-                    <!-- <li class="active">
-                    
-                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
+                    <li class="">
+                        <a href="setting.php"><i class="fa fa-fw fa-gear fa-5xx"></i> Setting</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
                     </li> -->
                 </ul>

@@ -4,8 +4,8 @@ include_once "../maincontroller.php";
 
 
 $obj = new maincontroller();
-
 $countPosts = $obj->countData('tbl_posts');
+$activePosts = $obj->countDataByColumn('tbl_posts','post_status','Published');
 $countUser = $obj->countData('tbl_users');
 $countCategory = $obj->countData('tbl_category');
 $countComments = $obj->countData('tbl_comments');
@@ -37,19 +37,29 @@ $countComments = $obj->countData('tbl_comments');
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Welcome to Admin
+                            <?php
+                            if(isset($_SESSION['name'])){
+                                echo "Welcome to Admin";
+                            }else{
+                                echo "Welcome to User";
+                            }
+                            ?>
+                            
                             <small><?php
                             if(isset($_SESSION['name']))
                             {
                             echo ucfirst($_SESSION['name']);
-                            }?></small>
+                            }?>
+                            <?php
+                            if(isset($_SESSION['uname']))
+                            {
+                            echo ucfirst($_SESSION['uname']);
+                            }?>    
+                        </small>
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="dashboard.php">Dashboard</a>
-                            </li>
-                            <li class="">
-                                <i class="fa fa-file"></i> Blank Page
                             </li>
                         </ol>
                     </div>
@@ -171,13 +181,13 @@ $countComments = $obj->countData('tbl_comments');
 
         var button = document.getElementById('change-chart');
         var chartDiv = document.getElementById('chart_div');
-
+        var countPosts = <?php echo $countPosts ? "$countPosts" : '0'?>;
         var data = google.visualization.arrayToDataTable([
           ['Data', 'Count'],
-          ['Posts', 100],
+          ['Posts', countPosts],
         <?php
             $eletext = ['Active Posts','Comments', 'Categories','Users'];
-            $elecount = [$countPosts, $countComments, $countCategory, $countUser];
+            $elecount = [$activePosts, $countComments, $countCategory, $countUser];
             for($i=0; $i<4;$i++){
                 echo "['{$eletext[$i]}'". "," . "{$elecount[$i]}],";
             }

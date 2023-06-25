@@ -96,15 +96,17 @@ if(isset($_POST['id'])){
                         <?php } ?>
                         <h1 class="page-header">
                             Users
-                            <small><a href="addUsers.php">Add</a></small>
+                            <?php if($res1){?>
+                            <small><a href="addUsers.php" class="btn btn-primary">ADD</a></small>
+                            <?php }?>
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="dashboard.php">Dashboard</a>
                             </li>
-                            <li class="">
+                            <!-- <li class="">
                                 <i class="fa fa-file"></i> Blank Page
-                            </li>
+                            </li> -->
                         </ol>
                     </div>
                     
@@ -114,7 +116,7 @@ if(isset($_POST['id'])){
                 
                 <div class="col-lg-12">
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="example">
                             <thead>
                                 <tr>
                                     <th>#ID</th>
@@ -124,7 +126,8 @@ if(isset($_POST['id'])){
                                     <th>Email</th>
                                     <th>Role</th>
                                     <th>Image</th>
-                                    <th colspan="2">Action</th>
+                                    <th>Action</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -154,7 +157,8 @@ if(isset($_POST['id'])){
                                     ?>
                                     </td> -->
                                     <td>
-                                    <a href="userEdit.php?edit=<?php echo $row['user_id'];?>"><i class="fa fa-edit" aria-hidden="true" title="edit"></i></a></td>
+                                    <a href="userEdit.php?edit=<?php echo $row['user_id'];?>"><i class="fa fa-edit" aria-hidden="true" title="edit"></i></a>
+                                    </td>
                                     <?php if($res1){?>
                                     <td>
                                     <!-- <form action="" method="post">
@@ -163,7 +167,9 @@ if(isset($_POST['id'])){
                                     </form> -->
                                     <a href="javascript:void(0)" data-id="<?php echo $row['user_id'];?>" class="btndelete"><i class="fa fa-trash" aria-hidden="true" title="delete"></i></a></td>
                                     </td>
-                                    <?php }?>
+                                    <?php }else{?>
+                                    <td></td>
+                                    <?php } ?>
                                 </tr>
                                 <?php }?>
                             </tbody>
@@ -219,6 +225,12 @@ if(isset($_POST['id'])){
                 swal("Cancelled", "Your imaginary file is safe :)", "error");
             }
             });
+        });
+        $(document).ready(function () {
+            var checkuser = "<?php echo $res1 ;?>";
+            if(checkuser){
+                let table = new DataTable('#example');
+            }
         });
     </script>
 </body>

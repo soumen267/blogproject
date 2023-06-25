@@ -2,6 +2,33 @@
 session_start();
 include_once "../maincontroller.php";
 $obj = new maincontroller();
+//login
+
+if(isset($_POST['login'])){
+    $uname = $_POST['username'];
+    $upwd = $_POST['password'];
+    if($uname == '' || $upwd == '')
+    {
+      $error = 'Username and password both is required';
+    }else{
+      $result = $obj->login('tbl_users', 'users', $uname, $upwd);
+      if($result == TRUE){
+          session_start();
+          $_SESSION['uname'] = $uname;
+          $referer = $_SERVER['HTTP_REFERER'];
+          header("Location: $referer");
+      }else{
+          $error = 'Invalid username or password';
+          header("Location: ");
+      }
+    }
+      
+  }
+  
+  if(isset($_POST['logout'])){
+      $obj->logout();
+  }
+
 if(isset($_REQUEST['edit'])){
     $id = $_REQUEST['edit'];
     $result = $obj->fetchPostsByID('tbl_posts','tbl_category',$id);
@@ -33,12 +60,6 @@ if(isset($_REQUEST['edit'])){
     $id = $_REQUEST['edit'];
     $result1 = $obj->fetchCommentsByPostID('tbl_comments','tbl_posts',$id);
 }
-
-
-// if(isset($_REQUEST['edit'])){
-//    $id = $_REQUEST['edit'];
-//    $result2 = $obj->canEditComment('tbl_posts',$userid,$id);
-// }
 $adm = 0;
 if(isset($_GET['adm'])){
     $adm = 1;
@@ -48,28 +69,48 @@ if(isset($_POST['commentid'])){
     $id = $_REQUEST['edit'];
     $result2 = $obj->fetchCommentsByPostID('tbl_comments','tbl_posts',$id);
 }
+$getCategory = $obj->fetchAllData("tbl_category");
 
+//Like Unlike
+if(isset($_REQUEST['edit']) && $obj->isLoggedIn()){
+    $id = $_REQUEST['edit'];
+    $userid = $obj->loggedinUserId();
+    $result3 = $obj->userUnlike($id, $userid);
+}
+if(isset($_POST['liked']) && $obj->isLoggedIn()){
+    $post_id = $_POST['post_id'];
+    $user_id = $_POST['user_id'];
+
+    $insertArray = array(
+        "post_id" => mysqli_real_escape_string($obj->conn, $post_id),
+        "user_id" => mysqli_real_escape_string($obj->conn, $user_id),
+    );
+    $obj->insertData('tbl_like', $insertArray);
+    if($obj){
+        echo "Inserted";
+    }
+    exit();
+}
+if(isset($_POST['unliked']) && $obj->isLoggedIn()){
+    $post_id = $_POST['post_id'];
+    $user_id = $_POST['user_id'];
+    $obj->deletedataWithoutDeleteColumn('tbl_like', $post_id, $user_id);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
+    <?php include "include/header.php"?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>Blog Post - Start Bootstrap Template</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/blog-post.css" rel="stylesheet">
+    
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -82,6 +123,7 @@ if(isset($_POST['commentid'])){
 <body>
 
     <!-- Navigation -->
+    <?php include "include/navigation.php"?>
     <?php
     
     if(!isset($_GET['adm']) && $adm != 1){?>
@@ -90,7 +132,7 @@ if(isset($_POST['commentid'])){
     <!-- Page Content -->
     <div class="container">
 
-        <div class="row">
+        <div class="row mydiv">
 
             <!-- Blog Post Content Column -->
             <?php if($adm != 1){?>
@@ -105,7 +147,7 @@ if(isset($_POST['commentid'])){
 
                 <!-- Author -->
                 <p class="lead">
-                    by <a href="#"><?php echo $post_author;?></a>
+                    by <?php echo $post_author;?>
                 </p>
 
                 <hr>
@@ -123,11 +165,19 @@ if(isset($_POST['commentid'])){
                 <img class="img-responsive" src="../admin/images/posts/<?php echo $post_image; ?>" alt="">
 
                 <hr>
-
                 <!-- Post Content -->
-                <p class="lead"><?php echo $post_content;?></p>
-                
-
+                <p class="lead likes"><?php echo $post_content;?>
+                <?php if($obj->isLoggedIn()){ ?>
+                <a class="<?php echo $result3 == TRUE ? 'unlike' : 'like'; ?>" href="javascript:void(0)">
+                <span class="glyphicon glyphicon-thumbs-up" data-toggle="tooltip" data-placement="top" title="<?php echo $result3 == TRUE ? ' I liked this before' : 'Want to like it?'; ?>"></span>
+                <?php echo $result3 == TRUE ? 'Unlike' : ' Like'; ?>
+                </a>
+                <?php }else{ ?>
+                <div class="row">
+                <p class="pull-right login-to-post">You need to <a href="javascript:void(0)" class="scroll">Login</a> to like </p>
+                </div>
+                <?php } ?>
+                </p>                
                 <?php if($adm != 1 && empty($adm)){?>
                 <hr>
                 <!-- Blog Comments -->
@@ -206,7 +256,7 @@ if(isset($_POST['commentid'])){
             <div class="col-md-4">
 
                 <!-- Blog Search Well -->
-                <div class="well">
+                <div class="well logindiv">
                     <h4>Blog Search</h4>
                     <div class="input-group">
                         <input type="text" class="form-control">
@@ -218,33 +268,45 @@ if(isset($_POST['commentid'])){
                     </div>
                     <!-- /.input-group -->
                 </div>
-
+                <!-- Login -->
+                <?php if(isset($_SESSION['uname'])){?>
+                <div class="well">
+                    <form action="" method="post">
+                    <button class="btn btn-primary" type="submit" name="logout">Logout</button>
+                    </form>
+                </div>
+                <?php }else{?>
+                <div class="well">
+                    <?php if(isset($error)){?>
+                        <div class="alert alert-danger alert-block">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
+                            <?php echo $error; ?>
+                        </div>
+                    <?php }?>
+                    <h4>Login</h4>
+                    <form action="" method="post">
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+                    <button class="btn btn-primary" type="submit" name="login">Submit</button>
+                    </form>
+                    <!-- /.input-group -->
+                    <br/>
+                    <a href="../forgotpassword.php" class="href">Forgot Password</a>
+                </div>
+                <?php } ?>
                 <!-- Blog Categories Well -->
                 <div class="well">
                     <h4>Blog Categories</h4>
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
+                                <?php if($getCategory) {foreach($getCategory as $row){?>
+                                    <li><a href="<?php echo $row['id'];?>"><?php echo $row['cat_name'];?></a></li>
+                                <?php }}?>
                             </ul>
                         </div>
                     </div>
@@ -271,23 +333,63 @@ if(isset($_POST['commentid'])){
     <!-- /.container -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <?php include "include/extrajs.php" ?>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script>
         $(document).ready(function(){
             $('#summernote').summernote();
         })
-    $(".editbtn").click(function(){
-        var sesval = "<?php echo $username;?>";
-        if(!sesval){
-            alert("Please Login before edit your comment!");
-        }
-    })
-    </script>
+        $(".editbtn").click(function(){
+            var sesval = "<?php echo $username;?>";
+            if(!sesval){
+                alert("Please Login before edit your comment!");
+            }
+        })
+        $(document).ready(function(){
+            $("[data-toggle='tooltip']").tooltip();
+            var post_id = "<?php echo $_GET['edit']; ?>";
+            var user_id = "<?php echo $obj->loggedinUserId(); ?>";
+            $('.like').click(function(){
+                    $.ajax({
+                        url: "userspost.php?edit=<?php echo $_GET['edit']; ?>",
+                        type: 'post',
+                        data: {
+                            'liked': 1,
+                            'post_id': post_id,
+                            'user_id': user_id
+                        },
+                        success:function(data){
+                            location.reload();
+                            console.log(data)
+                        }
+                    });
+            });
 
+            $('.unlike').click(function(){
+                $.ajax({
+                    url: "userspost.php?edit=<?php echo $_GET['edit']; ?>",
+                    type: 'post',
+                    data: {
+                        'unliked': 1,
+                        'post_id': post_id,
+                        'user_id': user_id
+                    },
+                    success:function(data){
+                        location.reload();
+                        console.log(data)
+                    }
+                });
+                });
+            })
+    $(".scroll").on("click", function(){
+        window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+        });
+    });
+ </script>
 </body>
 
 </html>

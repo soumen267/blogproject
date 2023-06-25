@@ -7,7 +7,7 @@ global $error;
 if(ISSET($_POST['submit'])){
     $username = mysqli_real_escape_string($obj->conn, $_POST['username']);
     $password = mysqli_real_escape_string($obj->conn, $_POST['password']);
-    $remember = mysqli_real_escape_string($obj->conn, $_POST['remember']);
+    $remember = isset($_POST['remember']);
 
     if($username == '' || $password == ''){
         $error = 'Username and Password is required.';

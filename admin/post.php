@@ -30,10 +30,8 @@ if(ISSET($_POST['id'])){
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
     <link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" />
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
 .btndelete{
     border: none;
@@ -73,15 +71,15 @@ if(ISSET($_POST['id'])){
                         <?php } ?>
                         <h1 class="page-header">
                             Posts
-                            <small><a href="addPosts.php">Add</a></small>
+                            <small><a href="addPosts.php" class="btn btn-primary">ADD</a></small>
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="dashboard.php">Dashboard</a>
                             </li>
-                            <li class="">
+                            <!-- <li class="">
                                 <i class="fa fa-file"></i> Blank Page
-                            </li>
+                            </li> -->
                         </ol>
                     </div>
                     
@@ -91,7 +89,7 @@ if(ISSET($_POST['id'])){
                 
                 <div class="col-lg-12">
                     <div class="table-responsive">
-                        <table class="table table-hover display">
+                        <table class="table table-hover display" id="example">
                             <thead>
                                 <tr>
                                     <th>#ID</th>
@@ -106,7 +104,9 @@ if(ISSET($_POST['id'])){
                                     <th>Comment Count</th>
                                     <th>Status</th>
                                     <th>View Count</th>
-                                    <th colspan="3">Action</th>
+                                    <th>Action</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -118,7 +118,7 @@ if(ISSET($_POST['id'])){
                                 ?>
                                 <tr id="row<?php echo $row['id'];?>" data-id="<?php echo $row['id'];?>">
                                     <td><?php echo $row['id'];?></td>
-                                    <td class="btn btn-warning"><?php echo $row['cat_name'];?></td>
+                                    <td class="btn btn-warning" style="margin-top: 5px;"><?php echo $row['cat_name'];?></td>
                                     <td><?php echo $row['post_title'];?></td>
                                     <td><?php echo $row['post_author'];?></td>
                                     <td><?php echo $row['username'];?></td>
@@ -151,9 +151,23 @@ if(ISSET($_POST['id'])){
                                     </td>
                                 </tr>
                                 <?php } } else{?>
-                                    </tr>
-                                    <td colspan="13">No post found</td>
                                     <tr>
+                                    <td colspan="15">No posts found</td>
+                                    <td style="display:none"></td>
+                                    <td style="display:none"></td>
+                                    <td style="display:none"></td>
+                                    <td style="display:none"></td>
+                                    <td style="display:none"></td>
+                                    <td style="display:none"></td>
+                                    <td style="display:none"></td>
+                                    <td style="display:none"></td>
+                                    <td style="display:none"></td>
+                                    <td style="display:none"></td>
+                                    <td style="display:none"></td>
+                                    <td style="display:none"></td>
+                                    <td style="display:none"></td>
+                                    <td style="display:none"></td>
+                                    </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
@@ -234,6 +248,9 @@ if(ISSET($_POST['id'])){
                 }
             })
         })
+$(document).ready(function () {
+    let table = new DataTable('#example');
+});
 </script>
 </body>
 </html>

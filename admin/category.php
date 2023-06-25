@@ -37,8 +37,8 @@ if(isset($_POST['id'])){
     $obj->deletedata('tbl_category', 'id', $id);
     echo "Deleted:";
 }
+$res1 = $obj->isAdmin('tbl_users',$obj->loggedinUsername());
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,15 +79,14 @@ if(isset($_POST['id'])){
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Category
-                            <small>Subheading</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="dashboard.php">Dashboard</a>
                             </li>
-                            <li class="">
+                            <!-- <li class="">
                                 <i class="fa fa-file"></i> Blank Page
-                            </li>
+                            </li> -->
                         </ol>
                     </div>
                     
@@ -150,7 +149,9 @@ if(isset($_POST['id'])){
                                         <input type="hidden" name="id" value="<?php echo $row['id'];?>">
                                         <button type="submit" name="delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form> -->
+                                    <?php if($res1){?>
                                     <a href="javascript:void(0)" data-id="<?php echo $row['id'];?>" class="btndelete"><i class="fa fa-trash" aria-hidden="true" title="delete"></i></a></td>
+                                    <?php }?>
                                     </td>
                                 </tr>
                                 <?php }?>
