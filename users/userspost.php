@@ -96,6 +96,10 @@ if(isset($_POST['unliked']) && $obj->isLoggedIn()){
     $user_id = $_POST['user_id'];
     $obj->deletedataWithoutDeleteColumn('tbl_like', $post_id, $user_id);
 }
+if(isset($_REQUEST['edit'])){
+    $id = $_REQUEST['edit'];
+    $countlikes = $obj->countDataByColumn('tbl_like', 'post_id', $id);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -169,9 +173,10 @@ if(isset($_POST['unliked']) && $obj->isLoggedIn()){
                 <p class="lead likes"><?php echo $post_content;?>
                 <?php if($obj->isLoggedIn()){ ?>
                 <a class="<?php echo $result3 == TRUE ? 'unlike' : 'like'; ?>" href="javascript:void(0)">
-                <span class="glyphicon glyphicon-thumbs-up" data-toggle="tooltip" data-placement="top" title="<?php echo $result3 == TRUE ? ' I liked this before' : 'Want to like it?'; ?>"></span>
+                <span class="glyphicon glyphicon-thumbs-<?php echo $result3 == TRUE ? 'down' : 'up'; ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $result3 == TRUE ? ' I liked this before' : 'Want to like it?'; ?>"></span>
                 <?php echo $result3 == TRUE ? 'Unlike' : ' Like'; ?>
                 </a>
+                (<?php echo $countlikes ? ''.$countlikes.'' : '0';?>)
                 <?php }else{ ?>
                 <div class="row">
                 <p class="pull-right login-to-post">You need to <a href="javascript:void(0)" class="scroll">Login</a> to like </p>
