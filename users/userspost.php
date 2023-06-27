@@ -108,6 +108,7 @@ if(isset($_REQUEST['edit'])){
     <?php include "include/header.php"?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -193,7 +194,13 @@ if(isset($_REQUEST['edit'])){
                     <form role="form" method="post" action="<?php $_SERVER['PHP_SELF']?>">
                         <input type="hidden" name="post_id" value="<?php echo $row['id'];?>">
                         <div class="form-group">
-                        <textarea name="comment_content" id="summernote" class="form-control" rows="3" placeholder="Post Content"></textarea>
+                        <input type="text" name="author" id="author" class="form-control" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email address">
+                        </div>
+                        <div class="form-group">
+                        <textarea name="comment_content" class="form-control" rows="3" placeholder="Post Content"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" name="comment">Submit</button>
                     </form>

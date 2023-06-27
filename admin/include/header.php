@@ -27,7 +27,7 @@ $countPostDraft = $obj->countDataByColumn('tbl_posts','post_status','draft');
     <title><?php
     $title = SITETITLE;
     echo $title ;?></title>
-
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 

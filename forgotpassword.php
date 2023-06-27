@@ -98,6 +98,7 @@ if(isset($_POST["otp-submit"])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <?php include "./users/include/header.php"?>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
@@ -107,8 +108,8 @@ if(isset($_POST["otp-submit"])){
   <link href="./users/css/blog-post.css" rel="stylesheet">
 </head>
 <body>
+<?php include "./users/include/navigation.php"?>
 <div class="container">
-<?php include "./users/include/header.php"?>
     <div class="form-gap"></div>
     <div class="container">
         <div class="row">

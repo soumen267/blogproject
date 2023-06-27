@@ -1,3 +1,20 @@
+<?php
+$activePage = basename($_SERVER['PHP_SELF'], ".php");
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active{
+        background-color: black;
+        color: whitesmoke!important;
+        }
+    </style>
+</head>
+<body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -8,10 +25,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="http://localhost/blogproject/users/">Home</a>
-                <a class="navbar-brand" href="about.php">About</a>
-                <a class="navbar-brand" href="services.php">Services</a>
-                <a class="navbar-brand" href="contact.php">Contact</a>
+                <a class="navbar-brand <?= ($activePage == 'index') ? 'active':''; ?>" href="http://localhost/blogproject/users/">Home</a>
+                <a class="navbar-brand <?= ($activePage == 'about') ? 'active':''; ?>" href="javascript:void(0)">About</a>
+                <a class="navbar-brand <?= ($activePage == 'services') ? 'active':''; ?>" href="javascript:void(0)">Services</a>
+                <a class="navbar-brand <?= ($activePage == 'contact') ? 'active':''; ?>" href="javascript:void(0)">Contact</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
                 <?php if(isset($_SESSION['uname'])){?>
@@ -48,4 +65,6 @@
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
-    </nav>
+    </nav>    
+</body>
+</html>

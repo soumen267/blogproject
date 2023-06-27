@@ -39,6 +39,7 @@ if(isset($_POST['logout'])){
 <html lang="en">
 <head>
     <?php include "include/header.php"?>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 
 <body>
@@ -54,10 +55,10 @@ if(isset($_POST['logout'])){
             <!-- Blog Entries Column -->
             <div class="col-md-8">
                 
-                <h1 class="page-header">
+                <!-- <h1 class="page-header">
                     Page Heading
                     <small>Secondary Text</small>
-                </h1>
+                </h1> -->
 
                 <!-- First Blog Post -->
                 <?php
@@ -141,6 +142,7 @@ if(isset($_POST['logout'])){
                     <!-- /.input-group -->
                     <br/>
                     <a href="../forgotpassword.php" class="href">Forgot Password</a>
+                    <a href="register.php" class="pull-right">Register</a>
                 </div>
                 <?php } ?>
                 <!-- Blog Categories Well -->
