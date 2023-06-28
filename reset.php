@@ -3,7 +3,7 @@ session_start();
 include_once "maincontroller.php";
 $obj = new maincontroller();
     if(!isset($_SESSION['email'])){
-        header("Location: http://localhost/blogproject/users/");
+        header("Location: http://localhost/blogproject/");
     }
 if(isset($_POST['resetPassword']))
 {
@@ -17,7 +17,7 @@ if(isset($_POST['resetPassword']))
             //$hashedPassword = password_hash($password, PASSWORD_BCRYPT, array('cost'=>12));
             $obj->updatedData('tbl_users', $inputData, 'user_email', $email);
             unset($email);
-            header("Location: http://localhost/blogproject/users/");
+            header("Location: http://localhost/blogproject/");
         }
 
     }
@@ -31,13 +31,13 @@ if(isset($_POST['resetPassword']))
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link href="./users/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-  <link href="./users/css/blog-post.css" rel="stylesheet">
+  <link href="css/blog-post.css" rel="stylesheet">
 </head>
 <body>
-<?php include "./users/include/navigation.php"?>
+<?php include "include/navigation.php"?>
 <div class="container">
     <div class="container">
         <div class="row">

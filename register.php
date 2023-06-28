@@ -1,7 +1,7 @@
 <?php
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
-include "../maincontroller.php";
+include "maincontroller.php";
 $obj = new maincontroller();
 global $nameerr,$passerr,$ferr,$lerr,$emailerr,$imageerr,$error;
 $err = 0;
@@ -55,7 +55,7 @@ if (isset($_POST['register'])) {
         $allow_type = array('jpeg','jpg');
         if(in_array($image_type, $allow_type))
         {
-            move_uploaded_file($tmpname, "../admin/images/users/".$ipath);
+            move_uploaded_file($tmpname, "admin/images/users/".$ipath);
             $date = date('Y-m-d');
             $insertData = array(
                 'username' => mysqli_real_escape_string($obj->conn, $_POST['username']),
@@ -143,7 +143,7 @@ if (isset($_POST['register'])) {
                             <div id="preview"></div>
                             <br/>
                             <button type="submit" name="register" class="btn btn-primary">Submit</button>
-                            <a href="http://localhost/blogproject/users/" class="pull-right" style="font-size:20px;">Login</a>
+                            <a href="http://localhost/blogproject/" class="pull-right" style="font-size:20px;">Login</a>
                         </form>
                     </div>
                 </div>

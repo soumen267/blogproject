@@ -1,6 +1,7 @@
 <?php
+
 session_start();
-require_once "../maincontroller.php";
+require_once "maincontroller.php";
 
 $obj = new maincontroller();
 
@@ -78,7 +79,7 @@ if(isset($_POST['logout'])){
                 ?>
                 </p>
                 <hr>
-                <img class="img-responsive" src="../admin/images/posts/<?php echo $row['post_image']; ?>" alt="Post Image">
+                <img class="img-responsive" src="admin/images/posts/<?php echo $row['post_image']; ?>" alt="Post Image">
                 <hr>
                 <p><?php echo substr($row['post_content'], 0, 400);?>
                 <a class="btn btn-primary" href="userspost.php?edit=<?php echo $row['id'];?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -141,7 +142,7 @@ if(isset($_POST['logout'])){
                     </form>
                     <!-- /.input-group -->
                     <br/>
-                    <a href="../forgotpassword.php" class="href">Forgot Password</a>
+                    <a href="forgotpassword.php" class="href">Forgot Password</a>
                     <a href="register.php" class="pull-right">Register</a>
                 </div>
                 <?php } ?>

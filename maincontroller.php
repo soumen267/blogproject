@@ -232,7 +232,7 @@ class maincontroller extends database{
             }
             if($role == 'user'){
                 session_destroy();
-                header("location: http://localhost/blogproject/users/");
+                header("location: http://localhost/blogproject/");
             }elseif($role == 'admin'){
                 session_destroy();
                 header("location: http://localhost/blogproject/admin/");

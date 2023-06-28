@@ -25,7 +25,7 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand <?= ($activePage == 'index') ? 'active':''; ?>" href="http://localhost/blogproject/users/">Home</a>
+                <a class="navbar-brand <?= ($activePage == 'index') ? 'active':''; ?>" href="http://localhost/blogproject/">Home</a>
                 <a class="navbar-brand <?= ($activePage == 'about') ? 'active':''; ?>" href="javascript:void(0)">About</a>
                 <a class="navbar-brand <?= ($activePage == 'services') ? 'active':''; ?>" href="javascript:void(0)">Services</a>
                 <a class="navbar-brand <?= ($activePage == 'contact') ? 'active':''; ?>" href="javascript:void(0)">Contact</a>
@@ -44,7 +44,7 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
                     <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="../admin/dashboard.php" target="__blank"><i class="fa fa-fw fa-user"></i> Profile</a>
+                            <a href="admin/dashboard.php" target="__blank"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
                         <!-- <li>
                             <a href="java"><i class="fa fa-fw fa-envelope"></i> Inbox</a>

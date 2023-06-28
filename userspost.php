@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once "../maincontroller.php";
+include_once "maincontroller.php";
 $obj = new maincontroller();
 //login
 
@@ -185,7 +185,7 @@ if(isset($_REQUEST['edit'])){
                 <hr>
 
                 <!-- Preview Image -->
-                <img class="img-responsive" src="../admin/images/posts/<?php echo $post_image; ?>" alt="">
+                <img class="img-responsive" src="admin/images/posts/<?php echo $post_image; ?>" alt="">
 
                 <hr>
                 <!-- Post Content -->
@@ -238,7 +238,7 @@ if(isset($_REQUEST['edit'])){
                 ?>
                 <div class="media">
                     <a class="pull-left" href="#">
-                        <img class="media-object" src="../admin/images/posts/<?php echo $post_image; ?>" alt="Image" style="height:28px;width:71px;">
+                        <img class="media-object" src="admin/images/posts/<?php echo $post_image; ?>" alt="Image" style="height:28px;width:71px;">
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading"><?php echo $row['author'] ? ''.$row['author'].'' : 'Unknown'; ?>
@@ -329,7 +329,7 @@ if(isset($_REQUEST['edit'])){
                     </form>
                     <!-- /.input-group -->
                     <br/>
-                    <a href="../forgotpassword.php" class="href">Forgot Password</a>
+                    <a href="forgotpassword.php" class="href">Forgot Password</a>
                     <a href="register.php" class="pull-right">Register</a>
                 </div>
                 <?php } ?>
