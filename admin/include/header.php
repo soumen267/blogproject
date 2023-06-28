@@ -30,7 +30,7 @@ $countPostDraft = $obj->countDataByColumn('tbl_posts','post_status','draft');
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+    
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
 

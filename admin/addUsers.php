@@ -99,14 +99,14 @@ if (isset($_POST['submit'])) {
         }
         .password-container input[type="password"],
         .password-container input[type="text"]{
-        width: 202%;
+        width: 215%;
         padding: 4px 36px 12px 12px;
         box-sizing: border-box;
         }
         .fa-eye{
         position: absolute;
         top: 57%;
-        right: -100% !important;
+        right: -111% !important;
         cursor: pointer;
         color: lightgray;
         }
@@ -146,7 +146,7 @@ if (isset($_POST['submit'])) {
                         <form action="" method="POST" class="" role="form" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label class="" for="">Username</label>
-                                <input type="text" class="form-control" name="username" placeholder="Username">
+                                <input type="text" class="form-control" name="username" value="<?php echo isset($_POST["username"]) ? $_POST["username"] : ''; ?>" placeholder="Username">
                                 <p class="text-danger"><?php echo $nameerr ;?></p>
                             </div>
                             <div class="form-group password-container">
@@ -157,22 +157,22 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Firstname</label>
-                                <input type="text" class="form-control" name="user_firstname" placeholder="Firstname">
+                                <input type="text" class="form-control" name="user_firstname" value="<?php echo isset($_POST["user_firstname"]) ? $_POST["user_firstname"] : ''; ?>" placeholder="Firstname">
                                 <p class="text-danger"><?php echo $ferr ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Lastname</label>
-                                <input type="text" class="form-control" name="user_lastname" placeholder="Lastname">
+                                <input type="text" class="form-control" name="user_lastname" value="<?php echo isset($_POST["user_lastname"]) ? $_POST["user_lastname"] : ''; ?>" placeholder="Lastname">
                                 <p class="text-danger"><?php echo $lerr ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Email</label>
-                                <input type="email" class="form-control" name="user_email" placeholder="Email">
+                                <input type="email" class="form-control" name="user_email" value="<?php echo isset($_POST["user_email"]) ? $_POST["user_email"] : ''; ?>" placeholder="Email">
                                 <p class="text-danger"><?php echo $emailerr ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Role</label>
-                                <select name="user_role" id="input" class="form-control" required="required">
+                                <select name="user_role" id="input" class="form-control">
                                     <option value="">Select</option>
                                     <option value="admin">Admin</option>
                                     <option value="user">User</option>
@@ -181,9 +181,11 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Image</label>
-                                <input type="file" class="form-control" name="user_image" placeholder="Image">
+                                <input type="file" class="form-control" name="user_image" placeholder="Image" id="image">
                                 <p class="text-danger"><?php echo $imageerr ;?></p>
                             </div>
+                            <div id="preview"></div>
+                            <br/>
                             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                         </form>
 
@@ -210,5 +212,19 @@ if (isset($_POST['submit'])) {
         })
         }
     </script>
+    <script>
+        function imagePreview(fileInput) {
+        if (fileInput.files && fileInput.files[0]) {
+            var fileReader = new FileReader();
+            fileReader.onload = function (event) {
+                $('#preview').html('<img src="'+event.target.result+'" width="89" height="80"/>');
+            };
+            fileReader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+    $("#image").change(function () {
+        imagePreview(this);
+    });
+</script>
 </body>
 </html>

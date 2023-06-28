@@ -80,9 +80,9 @@ if(ISSET($_POST['submit'])){
                                 <input id="remember" name="remember" type="checkbox" <?php if(isset($_COOKIE["username"])) { ?> checked <?php } ?>></span></label><br>
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="Submit">
                             </div>
-                            <div id="register-link" class="text-right">
+                            <!-- <div id="register-link" class="text-right">
                                 <a href="register.php" class="text-info">Register here</a>
-                            </div>
+                            </div> -->
                         </form>
                     </div>
                 </div>

@@ -105,45 +105,61 @@ if (isset($_POST['register'])) {
 <body>
     <?php include "include/navigation.php"?>
         <!-- <h3 class="text-center text-white pt-5">Login form</h3> -->
-        <div class="container-fluid">
+        <div class="container-fluid" style=" background-color: #17a2b8;">
             <div class="row vertical-center">
-                        <form id="login-form" class="col-xs-8 col-xs-offset-2  col-sm-6 col-sm-offset-3 col-md-4 col-sm-offset-4 col-lg-2 col-lg-offset-5" action="" method="post" enctype="multipart/form-data">
+                        <form id="login-form" class="col-xs-8 col-xs-offset-2  col-sm-6 col-sm-offset-3 col-md-4 col-sm-offset-4 col-lg-2 col-lg-offset-5" action="" method="post" enctype="multipart/form-data"  style="background-color: #EAEAEA; padding:18px;border: 1px solid white;">
                             <h3 class="text-center text-info">Register</h3>
                             <p class="error text-danger"><?php echo $error; ?></p>
                             <div class="form-group">
                                 <label for="username">Username:</label><br>
-                                <input type="text" name="username" id="username" value="" class="form-control">
+                                <input type="text" name="username" id="username" value="<?php echo isset($_POST["username"]) ? $_POST["username"] : ''; ?>" class="form-control" placeholder="Username">
                                 <p class="text-danger"><?php echo $nameerr ;?></p>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label><br>
-                                <input type="password" name="password" id="password" value="" class="form-control">
+                                <input type="password" name="password" id="password" value="<?php echo isset($_POST["password"]) ? $_POST["password"] : ''; ?>" class="form-control" placeholder="Password">
                                 <p class="text-danger"><?php echo $passerr ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" class="text-info">Firstname</label>
-                                <input type="text" class="form-control" name="user_firstname" placeholder="Firstname">
+                                <input type="text" class="form-control" name="user_firstname" value="<?php echo isset($_POST["user_firstname"]) ? $_POST["user_firstname"] : ''; ?>" placeholder="Firstname">
                                 <p class="text-danger"><?php echo $ferr ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Lastname</label>
-                                <input type="text" class="form-control" name="user_lastname" placeholder="Lastname">
+                                <input type="text" class="form-control" name="user_lastname" value="<?php echo isset($_POST["user_lastname"]) ? $_POST["user_lastname"] : ''; ?>" placeholder="Lastname">
                                 <p class="text-danger"><?php echo $lerr ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Email</label>
-                                <input type="email" class="form-control" name="user_email" placeholder="Email">
+                                <input type="email" class="form-control" name="user_email" value="<?php echo isset($_POST["user_email"]) ? $_POST["user_email"] : ''; ?>" placeholder="Email">
                                 <p class="text-danger"><?php echo $emailerr ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Image</label>
-                                <input type="file" class="form-control" name="user_image" placeholder="Image">
+                                <input type="file" class="" name="user_image" placeholder="Image" id="image">
                                 <p class="text-danger"><?php echo $imageerr ;?></p>
                             </div>
+                            <div id="preview"></div>
+                            <br/>
                             <button type="submit" name="register" class="btn btn-primary">Submit</button>
                             <a href="http://localhost/blogproject/users/" class="pull-right" style="font-size:20px;">Login</a>
                         </form>
                     </div>
                 </div>
+<script>
+    function imagePreview(fileInput) {
+    if (fileInput.files && fileInput.files[0]) {
+        var fileReader = new FileReader();
+        fileReader.onload = function (event) {
+            $('#preview').html('<img src="'+event.target.result+'" width="89" height="80"/>');
+        };
+        fileReader.readAsDataURL(fileInput.files[0]);
+    }
+}
+$("#image").change(function () {
+    imagePreview(this);
+});
+</script>
 </body>
 </html>

@@ -18,11 +18,11 @@ if (isset($_POST['post'])) {
         $err = 1;
     }
     if($_POST['post_content'] == '' || empty($_POST['post_content'])){
-        $contenterrors = "Post user is required!";
+        $contenterrors = "Post content is required!";
         $err = 1;
     }
     if($_POST['post_tag'] == '' || empty($_POST['post_tag'])){
-        $tagerrors = "Post user is required!";
+        $tagerrors = "Post tag is required!";
         $err = 1;
     }
      if($err != 1 && isset($_FILES['post_image']['name'])){
@@ -37,7 +37,7 @@ if (isset($_POST['post'])) {
         move_uploaded_file($_FILES['post_image']['tmp_name'],'images/posts/'.$filename);
         $date = date('Y-m-d');
         $username = $_SESSION['name'];
-        $userid = $obj->getUserID('tbl_users', $username);
+        $userid = $obj->loggedinUserId();
         $insertData = array(
             'post_cat_id' => mysqli_real_escape_string($obj->conn, $_POST['post_cat_id']),
             'post_title' => mysqli_real_escape_string($obj->conn, $_POST['post_title']),
@@ -48,7 +48,7 @@ if (isset($_POST['post'])) {
             'post_content' => mysqli_real_escape_string($obj->conn, $_POST['post_content']),
             'post_tag' => mysqli_real_escape_string($obj->conn, $_POST['post_tag']),
         );
-        $obj->insertUserData('tbl_posts', $insertData);
+        $obj->insertData('tbl_posts', $insertData);
         $_SESSION['added'] = 'Post added successfully.';
         header("location: http://localhost/blogproject/admin/post.php");
         exit();
@@ -69,7 +69,6 @@ $result = $obj->fetchAllData('tbl_category');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
 </head>
 
 <body>
@@ -119,32 +118,32 @@ $result = $obj->fetchAllData('tbl_category');
                                         <option value="<?php echo $row['id']; ?>"><?php echo $row['cat_name']; ?></option>
                                     <?php } ?>
                                 </select>
-                                <?php echo $cateerrors ;?>
+                                <p style="color:red"><?php echo $cateerrors ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Post Title</label>
-                                <input type="text" class="form-control" name="post_title" id="" placeholder="Post Title">
-                                <?php echo $titleerrors ;?>
+                                <input type="text" class="form-control" value="<?php echo isset($_POST["post_title"]) ? $_POST["post_title"] : ''; ?>" name="post_title" placeholder="Post Title">
+                                <p style="color:red"><?php echo $titleerrors ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Post Author</label>
-                                <input type="text" class="form-control" name="post_author" id="" placeholder="Post Author">
-                                <?php echo $authorerrors ;?>
+                                <input type="text" class="form-control" name="post_author" value="<?php echo isset($_POST["post_author"]) ? $_POST["post_author"] : ''; ?>" placeholder="Post Author">
+                                <p style="color:red"><?php echo $authorerrors ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Image</label>
-                                <input type="file" class="form-control" name="post_image" id="" placeholder="Image">
-                                
+                                <input type="file" class="form-control" name="post_image" placeholder="Image" id="image">
+                                <div id="preview"></div>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Post Tag</label>
-                                <input type="text" class="form-control" name="post_tag" id="" placeholder="Post Tag">
-                                <?php echo $tagerrors ;?>
+                                <input type="text" class="form-control" name="post_tag" value="<?php echo isset($_POST["post_tag"]) ? $_POST["post_tag"] : ''; ?>" placeholder="Use comma space between two tags" id="tags-input">
+                                <p style="color:red"><?php echo $tagerrors ;?></p>
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Post Content</label>
-                                <textarea name="post_content" id="summernote" class="form-control" rows="3" placeholder="Post Content"></textarea>
-                                <?php echo $contenterrors ;?>
+                                <textarea name="post_content" id="summernote" class="form-control" rows="3" value="<?php echo isset($_POST["post_content"]) ? $_POST["post_content"] : ''; ?>" placeholder="Post Content"></textarea>
+                                <p style="color:red"><?php echo $contenterrors ;?></p>
                             </div>
                             <button type="submit" name="post" class="btn btn-primary">Submit</button>
                         </form>
@@ -166,5 +165,19 @@ $result = $obj->fetchAllData('tbl_category');
                 $('#summernote').summernote();
             })
         </script>                                        
+        <script>
+    function imagePreview(fileInput) {
+            if (fileInput.files && fileInput.files[0]) {
+                var fileReader = new FileReader();
+                fileReader.onload = function (event) {
+                    $('#preview').html('<img src="'+event.target.result+'" width="89" height="80"/>');
+                };
+                fileReader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+        $("#image").change(function () {
+            imagePreview(this);
+        });
+    </script>
 </body>
 </html>

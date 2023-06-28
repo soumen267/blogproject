@@ -122,6 +122,8 @@ class maincontroller extends database{
                 $tablename.id,
                 $tablename.post_id AS postid,
                 $tablename.comment_content AS comment_content,
+                $tablename.author,
+                $tablename.email,
                 $tablename.created_at AS created_at
                 FROM $tablename
                 INNER JOIN $foreigntable

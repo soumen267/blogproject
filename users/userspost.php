@@ -45,16 +45,34 @@ global $username,$userid,$adm;
 if(ISSET($_SESSION['uname'])){
     $username = $_SESSION['uname'];
 }
-
+global $conterr,$authorerr,$emailerr;
+$err = 0;
 if(isset($_POST['comment'])){
     $userid = $obj->loggedinUserId();
-    $insertData = array(
-        'post_id' => mysqli_real_escape_string($obj->conn, $_POST['post_id']),
-        'comment_content' => mysqli_real_escape_string($obj->conn, $_POST['comment_content']),
-        'user_id' => mysqli_real_escape_string($obj->conn, $userid)
-    );
-    $result = $obj->insertData('tbl_comments', $insertData);
-    header("Location: ");
+    if($_POST['comment_content'] == ''){
+        $conterr = 'Content is required!';
+        $err = 1;
+    }
+    if($_POST['author'] == ''){
+        $authorerr = 'Author is required!';
+        $err = 1;
+    }
+    if($_POST['email'] == ''){
+        $emailerr = 'Email is required!';
+        $err = 1;
+    }
+    if($err != 1){
+        $insertData = array(
+            'post_id' => mysqli_real_escape_string($obj->conn, $_POST['post_id']),
+            'comment_content' => mysqli_real_escape_string($obj->conn, $_POST['comment_content']),
+            'user_id' => mysqli_real_escape_string($obj->conn, $userid),
+            'author' => mysqli_real_escape_string($obj->conn, $_POST['author']),
+            'email' => mysqli_real_escape_string($obj->conn, $_POST['email'])
+        );
+        $result = $obj->insertData('tbl_comments', $insertData);
+        header("Location: ");
+    }
+    
 }
 if(isset($_REQUEST['edit'])){
     $id = $_REQUEST['edit'];
@@ -195,12 +213,15 @@ if(isset($_REQUEST['edit'])){
                         <input type="hidden" name="post_id" value="<?php echo $row['id'];?>">
                         <div class="form-group">
                         <input type="text" name="author" id="author" class="form-control" placeholder="Enter your name">
+                        <p style="color:red"><?php echo $authorerr; ?><p>
                         </div>
                         <div class="form-group">
                         <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email address">
+                        <p style="color:red"><?php echo $emailerr; ?></p>
                         </div>
                         <div class="form-group">
                         <textarea name="comment_content" class="form-control" rows="3" placeholder="Post Content"></textarea>
+                        <p style="color:red"><?php echo $conterr; ?></p>
                         </div>
                         <button type="submit" class="btn btn-primary" name="comment">Submit</button>
                     </form>
@@ -213,13 +234,14 @@ if(isset($_REQUEST['edit'])){
                 <!-- Comment -->
                 <?php
                 if(!empty($result1)){
-                foreach($result1 as $row){?>
+                foreach($result1 as $row){
+                ?>
                 <div class="media">
                     <a class="pull-left" href="#">
                         <img class="media-object" src="../admin/images/posts/<?php echo $post_image; ?>" alt="Image" style="height:28px;width:71px;">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading"><?php echo $post_title; ?>
+                        <h4 class="media-heading"><?php echo $row['author'] ? ''.$row['author'].'' : 'Unknown'; ?>
                             <small><?php
                                 $text = $row['created_at'];
                                 $dd = explode(" ",$text);
@@ -308,6 +330,7 @@ if(isset($_REQUEST['edit'])){
                     <!-- /.input-group -->
                     <br/>
                     <a href="../forgotpassword.php" class="href">Forgot Password</a>
+                    <a href="register.php" class="pull-right">Register</a>
                 </div>
                 <?php } ?>
                 <!-- Blog Categories Well -->
