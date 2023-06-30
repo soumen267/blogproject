@@ -47,18 +47,19 @@ if($email){
           $mail->addAddress('recipient1@mailtrap.io');  
 
           $mail->isHTML(true);  
-  //         $email_template = './mail/index.html';
+          $email_template = './mail/index.html';
           // $mail->Body = '<p>Please click to reset your password
 
           //     <a href="http://localhost/blogproject/reset.php?email='.$emails.'&token='.$token.' ">http://localhost/blogproject/reset.php?email='.$emails.'&token='.$token.'</a>
 
           //   </p>'; 
-         $mail->Body = '<p>Your one time email verification code is '.$otp.'
-         </p>'; 
-          //$message = file_get_contents($email_template);
-          $message = "Your one time email verification code is" . $otp;
+         //$mail->Body = '<p>Your one time email verification code is '.$otp.'
+         //</p>'; 
+          $message = file_get_contents($email_template, $otp);
+          $message = str_replace('%otp%', $otp, $message);
+          //$message = "Your one time email verification code is" . $otp;
 
-          //$mail->MsgHTML($message);  
+          $mail->MsgHTML($message);  
 
           $mail->Subject = 'Email verification from MyBlog';
 
@@ -84,13 +85,19 @@ if($email){
 
 }
 if(isset($_POST["otp-submit"])){
-  if($_POST["otp"] == $_SESSION['session_otp']){
-    unset($_SESSION['session_otp']);
-    $emailerr = "Success!";
-    header("Location: http://localhost/blogproject/reset.php?ver");
-  }else{
-    $emailerr = "Invalid OTP please try again!";
-  }
+  $timestamp =  $_SERVER["REQUEST_TIME"];
+  // if(($timestamp - isset($_SESSION['time'])) > 300)  // 300 refers to 300 seconds
+  //   {
+  //       $emailerr = "OTP expired. Pls. try again.";
+  //   }else{
+      if($_POST["otp"] == $_SESSION['session_otp']){
+        unset($_SESSION['session_otp']);
+        $emailerr = "Success!";
+        header("Location: http://localhost/blogproject/reset.php?ver");
+      }else{
+        $emailerr = "Invalid OTP please try again!";
+      }
+    //}
 }
 
 ?>

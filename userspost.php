@@ -241,7 +241,7 @@ if(isset($_REQUEST['edit'])){
                         <img class="media-object" src="admin/images/posts/<?php echo $post_image; ?>" alt="Image" style="height:28px;width:71px;">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading"><?php echo $row['author'] ? ''.$row['author'].'' : 'Unknown'; ?>
+                        <h4 class="media-heading"><?php echo $row['author'] ? ''.$row['author'].'' : 'Anonymous'; ?>
                             <small><?php
                                 $text = $row['created_at'];
                                 $dd = explode(" ",$text);
@@ -290,7 +290,7 @@ if(isset($_REQUEST['edit'])){
             <div class="col-md-4">
 
                 <!-- Blog Search Well -->
-                <div class="well logindiv">
+                <div class="well logindiv login">
                     <h4>Blog Search</h4>
                     <div class="input-group">
                         <input type="text" class="form-control">
@@ -418,12 +418,17 @@ if(isset($_REQUEST['edit'])){
                 });
                 });
             })
+    // $(".scroll").on("click", function(){
+    //     window.scrollTo({
+    //     top: 0,
+    //     behavior: "smooth"
+    //     });
+    // });
     $(".scroll").on("click", function(){
-        window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-        });
-    });
+    $('html, body').animate({
+        scrollTop: $(".login").offset().top
+    }, 1000);
+    })
  </script>
 </body>
 

@@ -78,9 +78,10 @@ if (isset($_POST['updateuser'])) {
                 move_uploaded_file($tmpname, "./images/users/".$ipath);
             }
             $date = date('Y-m-d');
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $insertData = array(
                 'username' => mysqli_real_escape_string($obj->conn, $_POST['username']),
-                'password' => mysqli_real_escape_string($obj->conn, $_POST['password']),
+                'password' => mysqli_real_escape_string($obj->conn, $password),
                 'user_firstname' => mysqli_real_escape_string($obj->conn, $_POST['user_firstname']),
                 'user_lastname' => mysqli_real_escape_string($obj->conn, $_POST['user_lastname']),
                 'user_image' => mysqli_real_escape_string($obj->conn, $ipath),
@@ -95,9 +96,10 @@ if (isset($_POST['updateuser'])) {
             $imageerr = "Only jpeg file is allowed!";
         }
     }elseif(ISSET($_POST['updateuser'])){
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $insertData = array(
             'username' => mysqli_real_escape_string($obj->conn, $_POST['username']),
-            'password' => mysqli_real_escape_string($obj->conn, $_POST['password']),
+            'password' => mysqli_real_escape_string($obj->conn, $password),
             'user_firstname' => mysqli_real_escape_string($obj->conn, $_POST['user_firstname']),
             'user_lastname' => mysqli_real_escape_string($obj->conn, $_POST['user_lastname']),
             'user_email' => mysqli_real_escape_string($obj->conn, $_POST['user_email']),

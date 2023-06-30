@@ -3,17 +3,16 @@ require_once "database.php";
 class maincontroller extends database{
 
     public function login($table_name,$type,$uname,$upwd){
-        $res = "SELECT * FROM $table_name WHERE `username` = '$uname' AND `password` = '$upwd'";
-        $res = mysqli_query($this->conn, $res);
-        if(mysqli_num_rows($res) > 0){
-            // if($type=="users"){
-            //     $_SESSION['uname']=$uname;
-            // }elseif($type=="admin"){
-            //     $_SESSION['name']=$uname;
-            // }
-            return true;
-        }else{
-            return false;
+        $res = "SELECT * FROM $table_name WHERE `username` = '$uname'";
+        $res1 = mysqli_query($this->conn, $res);
+        if(mysqli_num_rows($res1) > 0){
+            while($row=mysqli_fetch_assoc($res1)){
+                if (password_verify($upwd, $row['password'])){ 
+                    return true;
+                }else{
+                    return false;
+                }
+            }
         }
     }
 
