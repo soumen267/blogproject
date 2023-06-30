@@ -12,3 +12,27 @@ John@7894561423
 Admin
 somu12345
 Soumen@123456677
+
+
+INSERT INTO `tbl_users` (`user_id`, `username`, `password`, `user_firstname`, `user_lastname`, `user_email`, `user_role`, `user_image`, `status`, `created_at`, `updateed_at`, `deleted_at`) VALUES
+(1, 'somu12345', 'Soumen@123456', 'Soumen', 'Das', 'soumen8412@gmail.com', 'admin', '6481e60ce903d.jpg', '1', '2023-06-23 21:37:11', '2023-06-23 21:37:11', NULL),
+(2, 'dan12345', 'Daniel@123456789', 'Daniel', 'Creg', 'd124@gmail.com', 'admin', '6481e62608392.jpg', '1', '2023-06-08 21:05:28', '2023-06-08 21:05:28', NULL),
+(3, 'somu123456', 'Soumen@456137899', 'Josh', 'dyne', 'josh@gmail.com', 'user', '6481e62f14fe7.jpg', '1', '2023-06-08 21:05:30', '2023-06-08 21:05:30', NULL),
+(4, 'tim12345', 'Tim|@123456789', 'Tim', 'John', 'tim42@gmail.com', 'user', '6485db80aeb32.jpg', '1', '2023-06-15 09:15:10', '2023-06-15 09:15:10', NULL),
+(5, 'simran1234', 'Simran@12345678', 'SImran', 'Kaur', 'simran@gmail.com', 'user', '648b0e2d87ee6.jpg', '1', '2023-06-15 18:42:13', '2023-06-15 18:42:13', NULL),
+(6, 'john12345', 'John@7894561423', 'John', 'D\'souza', 'john@gmail.com', 'user', '648b0eb138c80.jpg', '1', '2023-06-16 10:52:44', '2023-06-16 10:52:44', NULL),
+(10, 'adam123456', 'Adam@12346789', 'Adam', 'Smith', 'adam@gmail.com', 'user', '6499cd9bbc97d.jpg', '1', '2023-06-26 23:10:43', '2023-06-26 23:10:43', NULL);
+
+
+https://izitoast.marcelodolza.com/
+
+Domain : dev04.stagingit.net
+IP Address : 192.53.172.35
+FTP User : dev04@dev04.stagingit.net
+Password : EV%1~WJtaqAu
+
+DB Name : stagingi_dev04
+Mysql User : stagingi_dev04
+DB Password : EV%1~WJtaqAu
+
+https://dev04.stagingit.net/Anik/shopify/php-admin/index.php?db=stagingi_dev04&target=db_structure.php&token=307faac1f94ee80708429c078d0e0107
