@@ -97,7 +97,7 @@ if(isset($_FILES['post_image']['name']) == true && $_FILES['post_image']['name']
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" integrity="sha512-xmGTNt20S0t62wHLmQec2DauG9T+owP9e6VU8GigI0anN7OXLip9i7IwEhelasml2osdxX71XcYm6BQunTQeQg==" crossorigin="anonymous"/>
 </head>
 
 <body>
@@ -161,7 +161,7 @@ if(isset($_FILES['post_image']['name']) == true && $_FILES['post_image']['name']
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Post Tag</label>
-                                <input type="text" class="form-control" name="post_tag" value="<?php echo $post_tag; ?>" placeholder="Post Tag">
+                                <input type="text" class="form-control" name="post_tag" value="" placeholder="Post Tag" id="tags-input">
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Post Status</label>
@@ -189,6 +189,10 @@ if(isset($_FILES['post_image']['name']) == true && $_FILES['post_image']['name']
         $(document).ready(function(){
             $('#summernote').summernote();
         })
+        $(document).ready(function() {
+        var tagsValue = "<?php echo $post_tag; ?>";
+        $("#tags-input").val(tagsValue).tagsinput();
+        });
     </script>
 
 </body>
