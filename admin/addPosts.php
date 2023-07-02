@@ -34,7 +34,7 @@ if (isset($_POST['post'])) {
         $allow_type = array('jpeg','jpg');
         if(in_array($image_type, $allow_type))
         {
-        move_uploaded_file($_FILES['post_image']['tmp_name'],'images/posts/'.$filename);
+        move_uploaded_file($_FILES['post_image']['tmp_name'],'./images/posts/'.$ipath);
         $date = date('Y-m-d');
         $username = $_SESSION['name'];
         $userid = $obj->loggedinUserId();
@@ -69,6 +69,8 @@ $result = $obj->fetchAllData('tbl_category');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" integrity="sha512-xmGTNt20S0t62wHLmQec2DauG9T+owP9e6VU8GigI0anN7OXLip9i7IwEhelasml2osdxX71XcYm6BQunTQeQg==" crossorigin="anonymous"/>
+
 </head>
 
 <body>
@@ -137,7 +139,7 @@ $result = $obj->fetchAllData('tbl_category');
                             </div>
                             <div class="form-group">
                                 <label class="" for="">Post Tag</label>
-                                <input type="text" class="form-control" name="post_tag" value="<?php echo isset($_POST["post_tag"]) ? $_POST["post_tag"] : ''; ?>" placeholder="Use comma space between two tags" id="tags-input">
+                                <input type="text" class="form-control" name="post_tag" id="tags-input" value="<?php echo isset($_POST["post_tag"]) ? $_POST["post_tag"] : ''; ?>">
                                 <p style="color:red"><?php echo $tagerrors ;?></p>
                             </div>
                             <div class="form-group">
@@ -177,6 +179,10 @@ $result = $obj->fetchAllData('tbl_category');
         }
         $("#image").change(function () {
             imagePreview(this);
+        });
+        $(document).ready(function() {
+        var tagsValue = '';
+        $("#tags-input").val(tagsValue).tagsinput();
         });
     </script>
 </body>
